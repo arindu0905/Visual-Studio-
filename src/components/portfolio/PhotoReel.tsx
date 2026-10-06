@@ -105,6 +105,7 @@ export function PhotoReel() {
                 src={p.src}
                 alt={p.alt}
                 fill
+                loading={i < 3 ? "eager" : "lazy"}
                 sizes={`(min-width: 768px) ${Math.round((64 * p.width) / p.height)}vh, 80vw`}
                 className="object-cover transition-transform duration-[1400ms] ease-[var(--ease-expo)] group-hover:scale-105"
               />

@@ -27,20 +27,20 @@ type Props = {
 
 const word: Variants = {
   hidden: { y: "110%", rotate: 3 },
-  show: { y: "0%", rotate: 0, transition: { duration: 1.1, ease: EASE } },
+  show: { y: "0%", rotate: 0, transition: { duration: 0.85, ease: EASE } },
 };
 
 /**
  * Word-by-word masked text reveal. The full string stays in the DOM as normal
  * text, so it is read correctly by screen readers and search engines.
  */
-export function SplitText({ text, id, as = "p", className, wordClassName, delay = 0, stagger = 0.06, trigger = "view" }: Props) {
+export function SplitText({ text, id, as = "p", className, wordClassName, delay = 0, stagger = 0.045, trigger = "view" }: Props) {
   const Tag = tags[as] as typeof motion.div;
   const words = text.split(" ");
 
   const play =
     trigger === "view"
-      ? { whileInView: "show" as const, viewport: { once: true, margin: "0px 0px -10% 0px" } }
+      ? { whileInView: "show" as const, viewport: { once: true, margin: "0px 0px -40px 0px" } }
       : { animate: "show" as const };
 
   return (

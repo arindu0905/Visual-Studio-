@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform, type MotionValue } from "framer-motion
 import { useRef } from "react";
 
 function Word({ children, progress, range }: { children: string; progress: MotionValue<number>; range: [number, number] }) {
-  const opacity = useTransform(progress, range, [0.16, 1]);
+  const opacity = useTransform(progress, range, [0.28, 1]);
   return (
     <span className="relative inline-block">
       <motion.span style={{ opacity }}>{children}</motion.span>
@@ -15,7 +15,7 @@ function Word({ children, progress, range }: { children: string; progress: Motio
 /** Words light up one by one as the paragraph travels through the viewport. */
 export function ScrollHighlight({ text, className, accent = [] }: { text: string; className?: string; accent?: string[] }) {
   const ref = useRef<HTMLParagraphElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.45"] });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.9", "end 0.55"] });
   const words = text.split(" ");
 
   return (

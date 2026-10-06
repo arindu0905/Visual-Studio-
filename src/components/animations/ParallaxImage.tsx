@@ -34,8 +34,8 @@ export function ParallaxImage({ src, alt, sizes, className, imgClassName, streng
       className={cn("relative overflow-hidden bg-ink-3", className)}
       initial={reveal ? { clipPath: "inset(100% 0% 0% 0%)" } : undefined}
       whileInView={reveal ? { clipPath: "inset(0% 0% 0% 0%)" } : undefined}
-      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-      transition={{ duration: reduce ? 0 : 1.4, ease: EASE }}
+      viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+      transition={{ duration: reduce ? 0 : 1.1, ease: EASE }}
     >
       <motion.div className="absolute inset-x-0" style={{ y, top: `-${strength}%`, bottom: `-${strength}%` }}>
         <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className={cn("object-cover", imgClassName)} />

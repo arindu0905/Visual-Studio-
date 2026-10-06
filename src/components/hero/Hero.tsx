@@ -12,7 +12,7 @@ import { RotatingWord } from "./RotatingWord";
 
 const line = {
   hidden: { y: "105%" },
-  show: (i: number) => ({ y: "0%", transition: { duration: 1.3, ease: EASE, delay: 0.35 + i * 0.12 } }),
+  show: (i: number) => ({ y: "0%", transition: { duration: 1.1, ease: EASE, delay: 0.1 + i * 0.1 } }),
 };
 
 const fade = {
@@ -37,7 +37,19 @@ export function Hero() {
   useEffect(() => {
     const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setPlayVideo(!reduced && !conn?.saveData);
+    if (reduced || conn?.saveData) return;
+    // Start streaming the reel only after the page has finished loading, so it never
+    // competes with the headline, fonts and poster image for bandwidth.
+    let id: number | undefined;
+    const start = () => {
+      id = window.setTimeout(() => setPlayVideo(true), 400);
+    };
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
+    return () => {
+      window.removeEventListener("load", start);
+      if (id) window.clearTimeout(id);
+    };
   }, []);
 
   // Loop the same segment of the showreel the original hero used.
@@ -87,7 +99,7 @@ export function Hero() {
 
       {/* Content */}
       <motion.div style={{ y: reduce ? 0 : contentY, opacity: fadeOut }} className="container-x relative z-10 flex flex-1 flex-col justify-end pb-24 pt-32 md:pb-24 md:pt-36">
-        <motion.p initial="hidden" animate="show" custom={0.2} variants={fade} className="eyebrow mb-6 flex items-center gap-3 text-bone/70 md:mb-10">
+        <motion.p initial="hidden" animate="show" custom={0.05} variants={fade} className="eyebrow mb-6 flex items-center gap-3 text-bone/70 md:mb-10">
           <span className="size-1.5 rounded-full bg-bronze" aria-hidden />
           Colombo, Sri Lanka — Photography · Videography · Strategy
         </motion.p>
@@ -112,10 +124,10 @@ export function Hero() {
         </h1>
 
         <div className="mt-10 flex flex-col gap-8 md:mt-14 md:flex-row md:items-end md:justify-between">
-          <motion.p initial="hidden" animate="show" custom={0.9} variants={fade} className="max-w-md text-lg leading-relaxed text-bone/80 md:text-xl">
+          <motion.p initial="hidden" animate="show" custom={0.5} variants={fade} className="max-w-md text-lg leading-relaxed text-bone/80 md:text-xl">
             {site.tagline}
           </motion.p>
-          <motion.div initial="hidden" animate="show" custom={1.05} variants={fade} className="flex flex-wrap items-center gap-3">
+          <motion.div initial="hidden" animate="show" custom={0.6} variants={fade} className="flex flex-wrap items-center gap-3">
             <ButtonLink href="/work">View our work</ButtonLink>
             <button
               type="button"

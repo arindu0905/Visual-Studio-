@@ -35,7 +35,7 @@ export function PhotoGallery({ initial = "all" }: { initial?: Filter }) {
 
   return (
     <>
-      <div role="group" aria-label="Filter photographs by category" className="sticky top-16 z-20 -mx-5 mb-10 flex gap-1 overflow-x-auto border-b border-line bg-ink/80 px-5 py-3 backdrop-blur-xl [scrollbar-width:none] md:mx-0 md:mb-14 md:px-0 [&::-webkit-scrollbar]:hidden">
+      <div role="group" aria-label="Filter photographs by category" className="sticky top-0 z-20 -mx-5 mb-10 flex gap-1 overflow-x-auto border-b border-line bg-ink/80 px-5 py-3 backdrop-blur-xl [scrollbar-width:none] md:mx-0 md:mb-14 md:px-0 [&::-webkit-scrollbar]:hidden">
         {tabs.map((t) => (
           <button
             key={t.id}
