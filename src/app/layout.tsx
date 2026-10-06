@@ -63,7 +63,18 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${display.variable} ${serif.variable} ${sans.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning className={`${display.variable} ${serif.variable} ${sans.variable}`}>
+      <head>
+        {/* Skip the intro for repeat visits this session and for reduced motion — runs before first paint. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem("vsp-intro")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro-seen")}catch(e){}`,
+          }}
+        />
+        <noscript>
+          <style>{`.preloader{display:none!important}`}</style>
+        </noscript>
+      </head>
       <body className="min-h-dvh bg-ink text-bone">
         <a
           href="#main"

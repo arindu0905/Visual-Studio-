@@ -75,11 +75,12 @@ export default function WorkPage() {
           <div className="grid gap-x-8 gap-y-16 md:grid-cols-12">
             {photoCategories.map((c, i) => (
               <article key={c.id} className={cn("group", i % 2 === 0 ? "md:col-span-7" : "md:col-span-5 md:mt-[10vw]")}>
-                <Link href={`/photography?category=${c.id}`} data-cursor="view" className="block">
+                <Link href={`/photography?category=${c.id}#gallery`} data-cursor="view" data-distort-root className="block">
                   <ParallaxImage
                     src={c.cover}
                     alt={c.coverAlt}
                     sizes="(min-width: 768px) 55vw, 100vw"
+                    distort
                     className={i % 2 === 0 ? "aspect-[16/11] w-full" : "aspect-[4/5] w-full"}
                     imgClassName="transition-transform duration-[1400ms] ease-[var(--ease-expo)] group-hover:scale-[1.06]"
                   />

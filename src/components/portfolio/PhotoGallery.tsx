@@ -7,6 +7,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { photoCategories, photos, type PhotoCategoryId } from "@/data/photography";
 import { cn, EASE } from "@/lib/utils";
+import { Tilt } from "@/components/effects/Tilt";
 
 type Filter = "all" | PhotoCategoryId;
 const PAGE = 24;
@@ -65,6 +66,7 @@ export function PhotoGallery({ initial = "all" }: { initial?: Filter }) {
             viewport={{ once: true, margin: "0px 0px -5% 0px" }}
             transition={{ duration: 0.9, ease: EASE, delay: (i % 3) * 0.06 }}
           >
+            <Tilt>
             <button
               type="button"
               onClick={() => setLightbox(i)}
@@ -85,6 +87,7 @@ export function PhotoGallery({ initial = "all" }: { initial?: Filter }) {
                 <span className="tabular-nums text-bone/70">{String(i + 1).padStart(3, "0")}</span>
               </span>
             </button>
+            </Tilt>
           </motion.li>
         ))}
       </motion.ul>

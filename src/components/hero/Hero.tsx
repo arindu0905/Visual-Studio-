@@ -9,6 +9,7 @@ import { EASE } from "@/lib/utils";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { ShowreelModal } from "@/components/ui/ShowreelModal";
 import { RotatingWord } from "./RotatingWord";
+import { useIntroDone } from "@/components/layout/Providers";
 
 const line = {
   hidden: { y: "105%" },
@@ -17,13 +18,15 @@ const line = {
 
 const fade = {
   hidden: { opacity: 0, y: 20 },
-  show: (d: number) => ({ opacity: 1, y: 0, transition: { duration: 1, ease: EASE, delay: d } }),
+  show: (d: number) => ({ opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE, delay: d } }),
 };
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const reduce = useReducedMotion();
+  const introDone = useIntroDone();
+  const play = introDone ? "show" : "hidden";
   const [reelOpen, setReelOpen] = useState(false);
   const [playVideo, setPlayVideo] = useState(false);
   const closeReel = useCallback(() => setReelOpen(false), []);
@@ -72,7 +75,7 @@ export function Hero() {
         <motion.div
           className="absolute inset-0"
           initial={{ scale: 1.18 }}
-          animate={{ scale: 1 }}
+          animate={{ scale: introDone ? 1 : 1.18 }}
           transition={{ duration: 2.4, ease: EASE }}
         >
           <Image src={site.media.poster} alt="" fill priority sizes="100vw" className="object-cover opacity-60" />
@@ -99,7 +102,7 @@ export function Hero() {
 
       {/* Content */}
       <motion.div style={{ y: reduce ? 0 : contentY, opacity: fadeOut }} className="container-x relative z-10 flex flex-1 flex-col justify-end pb-24 pt-32 md:pb-24 md:pt-36">
-        <motion.p initial="hidden" animate="show" custom={0.05} variants={fade} className="eyebrow mb-6 flex items-center gap-3 text-bone/70 md:mb-10">
+        <motion.p initial="hidden" animate={play} custom={0.05} variants={fade} className="eyebrow mb-6 flex items-center gap-3 text-bone/70 md:mb-10">
           <span className="size-1.5 rounded-full bg-bronze" aria-hidden />
           Colombo, Sri Lanka — Photography · Videography · Strategy
         </motion.p>
@@ -115,7 +118,7 @@ export function Hero() {
               <span key="c">{site.headline.tail}</span>,
             ].map((content, i) => (
               <span key={i} className="block overflow-hidden pb-[0.06em]">
-                <motion.span className="block" initial="hidden" animate="show" custom={i} variants={line}>
+                <motion.span className="block" initial="hidden" animate={play} custom={i} variants={line}>
                   {content}
                 </motion.span>
               </span>
@@ -124,10 +127,10 @@ export function Hero() {
         </h1>
 
         <div className="mt-10 flex flex-col gap-8 md:mt-14 md:flex-row md:items-end md:justify-between">
-          <motion.p initial="hidden" animate="show" custom={0.5} variants={fade} className="max-w-md text-lg leading-relaxed text-bone/80 md:text-xl">
+          <motion.p initial="hidden" animate={play} custom={0.25} variants={fade} className="max-w-md text-lg leading-relaxed text-bone/80 md:text-xl">
             {site.tagline}
           </motion.p>
-          <motion.div initial="hidden" animate="show" custom={0.6} variants={fade} className="flex flex-wrap items-center gap-3">
+          <motion.div initial="hidden" animate={play} custom={0.35} variants={fade} className="flex flex-wrap items-center gap-3">
             <ButtonLink href="/work">View our work</ButtonLink>
             <button
               type="button"
@@ -148,7 +151,7 @@ export function Hero() {
       <motion.div
         aria-hidden
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1, transition: { delay: 1.6 } }}
+        animate={introDone ? { opacity: 1, transition: { delay: 1.2 } } : { opacity: 0 }}
         className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex"
       >
         <span className="eyebrow text-[0.62rem] text-bone/60">Scroll</span>

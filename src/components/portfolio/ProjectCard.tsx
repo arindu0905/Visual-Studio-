@@ -15,13 +15,14 @@ type Props = {
 export function ProjectCard({ project, index, aspect = "aspect-[16/10]", sizes, className }: Props) {
   return (
     <article className={cn("group", className)}>
-      <Link href={`/work/${project.slug}`} data-cursor="view" className="block" aria-label={`${project.title} — ${project.category}`}>
+      <Link href={`/work/${project.slug}`} data-cursor="view" data-distort-root className="block" aria-label={`${project.title} — ${project.category}`}>
         <div className="relative overflow-hidden">
           <ParallaxImage
             src={project.cover}
             alt={project.coverAlt}
             sizes={sizes}
             strength={8}
+            distort
             className={cn(aspect, "w-full")}
             imgClassName={cn(
               "transition-transform duration-[1400ms] ease-[var(--ease-expo)] group-hover:scale-[1.06]",

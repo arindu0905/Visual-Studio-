@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { photos, photoCategories } from "@/data/photography";
 import { asset } from "@/lib/assets";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { HoverDistort } from "@/components/effects/HoverDistort";
 
 /** Curated frames from the photography archive (all from the current portfolio). */
 const picks = [
@@ -27,103 +28,194 @@ const frames = picks
 
 const labelFor = (id: string) => photoCategories.find((c) => c.id === id)?.short ?? "";
 
+const SPEED = 55; // px per second
+
 /**
- * GSAP is used here for one job it does best: pinning the section and scrubbing
- * a horizontal track with the vertical scroll. On touch screens and with reduced
- * motion it falls back to a native, swipeable horizontal scroller.
+ * Self-playing photography reel. The strip glides on its own in an endless loop,
+ * eases to a stop while hovered or touched, and can be dragged/swiped in either
+ * direction. It only runs while on screen, and stays still for reduced motion.
  */
 export function PhotoReel() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let ctx: { revert: () => void } | undefined;
-    let cancelled = false;
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    if (!viewport || !track) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    (async () => {
-      const [{ gsap }, { ScrollTrigger }] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
-      if (cancelled || !sectionRef.current || !trackRef.current) return;
-      gsap.registerPlugin(ScrollTrigger);
+    let offset = 0;
+    let speed = reduced ? 0 : SPEED;
+    let targetSpeed = speed;
+    let visible = false;
+    let raf = 0;
+    let last = performance.now();
+    let drag: { x: number; offset: number; moved: boolean } | null = null;
 
-      const mm = gsap.matchMedia();
-      mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
-        const track = trackRef.current!;
-        const distance = () => Math.max(0, track.scrollWidth - window.innerWidth);
-        gsap.to(track, {
-          x: () => -distance(),
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: () => `+=${distance()}`,
-            pin: true,
-            scrub: 0.8,
-            invalidateOnRefresh: true,
-            anticipatePin: 1,
-          },
-        });
-      });
-      ctx = mm;
-      // Images have explicit aspect ratios, but fonts can shift the intro panel slightly.
-      document.fonts?.ready.then(() => !cancelled && ScrollTrigger.refresh());
-    })();
+    // Exact loop length: distance from the first frame to its duplicate (includes the gap).
+    const half = () => {
+      const kids = track.children as HTMLCollectionOf<HTMLElement>;
+      const n = kids.length / 2;
+      return n ? kids[n].offsetLeft - kids[0].offsetLeft : 0;
+    };
+    const wrap = () => {
+      const h = half();
+      if (h <= 0) return;
+      while (offset <= -h) offset += h;
+      while (offset > 0) offset -= h;
+    };
+    const apply = () => {
+      track.style.transform = `translate3d(${offset}px,0,0)`;
+    };
+
+    const tick = (t: number) => {
+      const dt = Math.min(0.05, (t - last) / 1000);
+      last = t;
+      speed += (targetSpeed - speed) * 0.06;
+      if (!drag) offset -= speed * dt;
+      wrap();
+      apply();
+      raf = visible ? requestAnimationFrame(tick) : 0;
+    };
+    const start = () => {
+      if (!raf) {
+        last = performance.now();
+        raf = requestAnimationFrame(tick);
+      }
+    };
+
+    const io = new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      if (visible) start();
+    });
+    io.observe(viewport);
+
+    const pause = () => (targetSpeed = 0);
+    const resume = () => (targetSpeed = reduced ? 0 : SPEED);
+
+    const down = (e: PointerEvent) => {
+      if (e.button !== 0) return;
+      drag = { x: e.clientX, offset, moved: false };
+      pause();
+    };
+    const move = (e: PointerEvent) => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x;
+      if (Math.abs(dx) > 6) drag.moved = true;
+      offset = drag.offset + dx;
+      wrap();
+      apply();
+    };
+    const up = (e: PointerEvent) => {
+      if (!drag) return;
+      const moved = drag.moved;
+      drag = null;
+      if (e.pointerType !== "mouse") resume();
+      // Swallow the click that follows a drag so it doesn't open a photo.
+      if (moved) {
+        const stop = (ev: Event) => {
+          ev.preventDefault();
+          ev.stopPropagation();
+        };
+        viewport.addEventListener("click", stop, { capture: true, once: true });
+        window.setTimeout(() => viewport.removeEventListener("click", stop, { capture: true }), 50);
+      }
+    };
+    const enter = (e: PointerEvent) => e.pointerType === "mouse" && pause();
+    const leave = () => {
+      drag = null;
+      resume();
+    };
+
+    viewport.addEventListener("pointerdown", down);
+    window.addEventListener("pointermove", move, { passive: true });
+    window.addEventListener("pointerup", up);
+    viewport.addEventListener("pointerenter", enter);
+    viewport.addEventListener("pointerleave", leave);
+    viewport.addEventListener("focusin", pause);
+    viewport.addEventListener("focusout", resume);
+    const onResize = () => {
+      wrap();
+      apply();
+    };
+    window.addEventListener("resize", onResize);
 
     return () => {
-      cancelled = true;
-      ctx?.revert();
+      cancelAnimationFrame(raf);
+      io.disconnect();
+      viewport.removeEventListener("pointerdown", down);
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", up);
+      viewport.removeEventListener("pointerenter", enter);
+      viewport.removeEventListener("pointerleave", leave);
+      viewport.removeEventListener("focusin", pause);
+      viewport.removeEventListener("focusout", resume);
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 
   return (
-    <section ref={sectionRef} aria-labelledby="photo-reel-title" className="relative overflow-hidden bg-ink-2">
-      <div
-        ref={trackRef}
-        className="flex h-auto snap-x snap-mandatory items-center gap-4 overflow-x-auto px-5 py-24 [scrollbar-width:none] md:h-[100svh] md:snap-none md:gap-8 md:overflow-visible md:px-[4vw] md:py-0 [&::-webkit-scrollbar]:hidden"
-      >
-        <div className="w-[78vw] shrink-0 snap-start pr-6 md:w-[38vw] md:pr-[4vw]">
+    <section aria-labelledby="photo-reel-title" className="relative overflow-hidden bg-ink-2 py-24 md:py-36">
+      <div className="container-x mb-14 flex flex-col justify-between gap-8 md:mb-20 md:flex-row md:items-end">
+        <div>
           <SectionLabel index="04">Our photography</SectionLabel>
           <h2 id="photo-reel-title" className="display-lg mt-8">
             Port<span className="serif-accent text-bronze">folio</span>
           </h2>
-          <p className="mt-8 max-w-sm text-bone/65">
+        </div>
+        <div className="max-w-sm">
+          <p className="text-bone/65">
             Food, product, fashion, jewellery, hospitality, interiors and architecture — photographed for brands across Sri Lanka.
           </p>
-          <Link href="/photography" className="group mt-10 inline-flex items-center gap-3 text-sm uppercase tracking-[0.2em] text-bone">
+          <Link href="/photography" className="group mt-8 inline-flex items-center gap-3 text-sm uppercase tracking-[0.2em] text-bone">
             <span className="link-underline">Explore the archive</span>
             <ArrowRight aria-hidden className="size-4 transition-transform duration-500 group-hover:translate-x-1.5" />
           </Link>
         </div>
+      </div>
 
-        {frames.map((p, i) => (
-          <figure
-            key={p.src}
-            className="group relative h-[min(52svh,420px)] shrink-0 snap-center md:h-[min(64svh,640px)]"
-            style={{ aspectRatio: `${p.width} / ${p.height}` }}
-          >
-            <Link href={`/photography?category=${p.category}`} data-cursor="view" className="absolute inset-0 overflow-hidden">
-              <Image
-                src={p.src}
-                alt={p.alt}
-                fill
-                loading={i < 3 ? "eager" : "lazy"}
-                sizes={`(min-width: 768px) ${Math.round((64 * p.width) / p.height)}vh, 80vw`}
-                className="object-cover transition-transform duration-[1400ms] ease-[var(--ease-expo)] group-hover:scale-105"
-              />
-            </Link>
-            <figcaption className="absolute -bottom-9 left-0 flex w-full justify-between text-xs uppercase tracking-[0.2em] text-bone/55">
-              <span>{labelFor(p.category)}</span>
-              <span className="tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-            </figcaption>
-          </figure>
-        ))}
-
-        <div className="flex w-[60vw] shrink-0 snap-end items-center justify-center md:w-[30vw]">
-          <Link href="/photography" data-cursor="view" className="group flex flex-col items-center gap-5 text-center">
-            <span className="grid size-28 place-items-center rounded-full border border-bone/25 transition-all duration-700 group-hover:scale-110 group-hover:border-bronze group-hover:bg-bronze group-hover:text-ink md:size-40">
-              <ArrowRight aria-hidden className="size-6" />
-            </span>
-            <span className="text-sm uppercase tracking-[0.2em] text-bone/70">Full portfolio</span>
-          </Link>
+      <div
+        ref={viewportRef}
+        className="relative cursor-grab touch-pan-y select-none active:cursor-grabbing [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]"
+        role="region"
+        aria-label="Photography reel — moves automatically; hover or touch to pause, drag to browse"
+      >
+        <div ref={trackRef} className="flex w-max gap-4 pb-12 will-change-transform md:gap-8">
+          {[0, 1].map((copy) =>
+            frames.map((p, i) => (
+              <figure
+                key={`${copy}-${p.src}`}
+                aria-hidden={copy === 1}
+                className="group relative h-[min(48svh,380px)] shrink-0 md:h-[min(62svh,600px)]"
+                style={{ aspectRatio: `${p.width} / ${p.height}` }}
+              >
+                <Link
+                  href={`/photography?category=${p.category}#gallery`}
+                  tabIndex={copy === 1 ? -1 : undefined}
+                  data-cursor="view"
+                  data-distort-root
+                  draggable={false}
+                  className="absolute inset-0 overflow-hidden"
+                >
+                  <Image
+                    src={p.src}
+                    alt={copy === 1 ? "" : p.alt}
+                    fill
+                    loading="eager"
+                    draggable={false}
+                    sizes={`(min-width: 768px) ${Math.round((62 * p.width) / p.height)}vh, ${Math.round((48 * p.width) / p.height)}vh`}
+                    className="object-cover transition-transform duration-[1400ms] ease-[var(--ease-expo)] group-hover:scale-105"
+                  />
+                  <HoverDistort />
+                </Link>
+                <figcaption className="absolute -bottom-9 left-0 flex w-full justify-between text-xs uppercase tracking-[0.2em] text-bone/55">
+                  <span>{labelFor(p.category)}</span>
+                  <span className="tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                </figcaption>
+              </figure>
+            )),
+          )}
         </div>
       </div>
     </section>

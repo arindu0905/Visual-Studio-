@@ -86,12 +86,13 @@ export default function AboutPage() {
 
           <div className="grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
             <Reveal>
-              <Link href="/work" data-cursor="view" className="group block">
+              <Link href="/work" data-cursor="view" data-distort-root className="group block">
                 <ParallaxImage
                   src="https://i.ytimg.com/vi/d-_dQ9-LmxE/maxresdefault.jpg"
                   alt="Chef Peter Kuruvita on set for ITC Rathnadeepa"
                   sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                   strength={6}
+                  distort
                   className="aspect-[3/2] w-full"
                   imgClassName="transition-transform duration-[1400ms] group-hover:scale-105"
                 />
@@ -101,12 +102,13 @@ export default function AboutPage() {
             </Reveal>
             {photoDisciplines.map((d, i) => (
               <Reveal key={d.label} delay={((i + 1) % 3) * 0.08}>
-                <Link href="/photography" data-cursor="view" className="group block">
+                <Link href="/photography" data-cursor="view" data-distort-root className="group block">
                   <ParallaxImage
                     src={d.image}
                     alt={d.alt}
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     strength={6}
+                    distort
                     className="aspect-[3/2] w-full"
                     imgClassName="transition-transform duration-[1400ms] group-hover:scale-105"
                   />

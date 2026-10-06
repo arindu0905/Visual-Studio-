@@ -2,7 +2,7 @@
   "name": "visual-studios-plus",
   "version": "1.0.0",
   "private": true,
-  "description": "Visual Studios Plus — creative agency website (frontend).",
+  "description": "Visual Studios Plus \u2014 creative agency website (frontend).",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,6 +13,7 @@
   "dependencies": {
     "framer-motion": "^14.0.0",
     "gsap": "^3.15.0",
+    "lenis": "^1.3.0",
     "lucide-react": "^1.52.0",
     "next": "^16.3.8",
     "react": "^19.3.0",

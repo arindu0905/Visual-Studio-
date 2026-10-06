@@ -11,8 +11,8 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-line bg-ink pt-24 md:pt-32">
       <div className="container-x">
-        <div className="grid gap-14 md:grid-cols-12 md:gap-8">
-          <div className="md:col-span-5">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-14 md:grid-cols-12 md:gap-8">
+          <div className="col-span-2 md:col-span-5">
             <p className="eyebrow mb-6">Visual Studios Plus</p>
             <p className="max-w-sm font-[family-name:var(--font-display)] text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-4xl">
               Content meant to be <span className="serif-accent text-bronze">experienced.</span> Not simply consumed.
@@ -52,7 +52,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="md:col-span-2">
+          <div className="col-span-2 md:col-span-2">
             <p className="eyebrow mb-5">Studio</p>
             <address className="space-y-2.5 text-[0.95rem] not-italic text-bone/70">
               <p>
