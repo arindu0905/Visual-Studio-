@@ -10,7 +10,9 @@
     "typecheck": "tsc --noEmit",
     "assets:download": "node scripts/download-assets.mjs",
     "wp:css": "node scripts/build-wp-theme.mjs --css-only",
-    "wp:build": "node scripts/build-wp-theme.mjs"
+    "wp:build": "node scripts/build-wp-theme.mjs",
+    "images:colors": "node scripts/image-colors.mjs",
+    "prebuild": "node scripts/image-colors.mjs"
   },
   "dependencies": {
     "framer-motion": "^14.0.0",

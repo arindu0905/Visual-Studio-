@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { clients, type Client } from "@/data/clients";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { cn } from "@/lib/utils";
@@ -12,16 +13,27 @@ function Row({ items, reverse }: { items: Client[]; reverse?: boolean }) {
         style={{ "--marquee-duration": "48s" } as React.CSSProperties}
       >
         {[...items, ...items].map((c, i) => (
-          <li key={`${c.name}-${i}`} aria-hidden={i >= items.length} className="flex h-24 w-44 shrink-0 items-center justify-center px-5 md:h-36 md:w-72 md:px-8">
+          <li
+            key={`${c.name}-${i}`}
+            aria-hidden={i >= items.length}
+            className="group/logo flex h-28 w-44 shrink-0 flex-col items-center justify-center px-5 md:h-40 md:w-72 md:px-8"
+          >
             <div className="relative h-full w-full">
               <Image
                 src={c.logo}
                 alt={i < items.length ? c.name : ""}
                 fill
                 sizes="(min-width: 768px) 160px, 112px"
-                className="object-contain py-4 opacity-80 mix-blend-multiply grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0 md:py-5"
+                className={cn(
+                  "object-contain py-3 opacity-70 transition-all duration-500 group-hover/logo:opacity-100 md:py-4",
+                  // White silhouettes on the dark band; solid-shape logos keep their colours.
+                  c.color ? "grayscale group-hover/logo:grayscale-0" : "brightness-0 invert",
+                )}
               />
             </div>
+            <span className="text-[0.65rem] uppercase tracking-[0.18em] text-stone transition-colors duration-500 group-hover/logo:text-bronze">
+              {c.sector}
+            </span>
           </li>
         ))}
       </ul>
@@ -29,18 +41,28 @@ function Row({ items, reverse }: { items: Client[]; reverse?: boolean }) {
   );
 }
 
-export function Clients() {
+export function Clients({
+  title,
+  text = "From global FMCG giants to boutique luxury houses across Sri Lanka & international markets.",
+}: {
+  title?: ReactNode;
+  text?: string;
+}) {
   const half = Math.ceil(clients.length / 2);
   return (
-    <section aria-labelledby="clients-title" className="relative bg-bone py-24 text-ink md:py-32">
+    <section data-clip="Clients" aria-labelledby="clients-title" className="relative border-y border-line bg-ink-2 py-24 md:py-32">
       <div className="container-x mb-12 flex flex-col justify-between gap-6 md:mb-16 md:flex-row md:items-end">
         <div>
-          <SectionLabel index="06">Clients</SectionLabel>
-          <h2 id="clients-title" className="display-md mt-6">
-            Trusted clients <span className="serif-accent text-[#8a6a52]">&amp;</span> partners
+          <SectionLabel index="09">Commercial client roster</SectionLabel>
+          <h2 id="clients-title" className="display-md mt-6 max-w-[18ch]">
+            {title ?? (
+              <>
+                Trusted by market leaders <span className="serif-accent text-bronze">&amp;</span> global brands
+              </>
+            )}
           </h2>
         </div>
-        <p className="max-w-xs text-sm text-ink/60">Hospitality, food, beauty and global brands that have trusted Visual Studios Plus.</p>
+        <p className="max-w-xs text-sm text-bone/60">{text}</p>
       </div>
       <div className="space-y-2">
         <Row items={clients.slice(0, half)} />

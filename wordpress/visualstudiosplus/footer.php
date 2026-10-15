@@ -67,7 +67,9 @@ $vsp_services_url = vsp_page_url( 'services' );
 	</div>
 
 	<div aria-hidden="true" class="container-x mt-24 select-none md:mt-32">
-		<p class="whitespace-nowrap text-center font-[family-name:var(--font-display)] text-[19.5vw] font-black leading-[0.75] tracking-[-0.06em] text-bone/[0.06] md:text-[18vw]">Visual<span class="text-bronze/30">+</span></p>
+		<svg viewBox="0 0 1600 172" class="block h-auto w-full" preserveAspectRatio="xMidYMid meet">
+			<text x="0" y="164" font-size="224" font-weight="900" letter-spacing="-11" textLength="1600" lengthAdjust="spacing" style="font-family: var(--font-display)" class="fill-bone/[0.06]">Visual Studios <tspan class="fill-bronze/30">+</tspan></text>
+		</svg>
 	</div>
 
 	<div class="container-x flex flex-col items-start justify-between gap-4 border-t border-line py-7 text-xs text-stone sm:flex-row sm:items-center">

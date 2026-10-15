@@ -84,7 +84,7 @@ export function Header() {
                     href={item.href}
                     aria-current={isActive(item.href) ? "page" : undefined}
                     className={cn(
-                      "group relative text-[0.82rem] tracking-wide transition-colors duration-300",
+                      "group relative text-xs font-semibold uppercase tracking-[0.05em] transition-colors duration-300",
                       isActive(item.href) ? "text-bone" : "text-bone/65 hover:text-bone",
                     )}
                   >
@@ -105,10 +105,10 @@ export function Header() {
             <Magnetic className="hidden lg:inline-block">
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-2 rounded-full border border-bone/25 px-5 py-2.5 text-[0.8rem] tracking-wide transition-colors duration-500 hover:border-bronze hover:bg-bronze hover:text-ink"
+                className="group inline-flex items-center gap-2 rounded-full border border-bone/25 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.05em] transition-colors duration-500 hover:border-bronze hover:bg-bronze hover:text-ink"
               >
                 <span className="size-1.5 rounded-full bg-bronze transition-colors group-hover:bg-ink" aria-hidden />
-                Start a project
+                Inquire project
               </Link>
             </Magnetic>
 
@@ -165,7 +165,7 @@ export function Header() {
                       <Link
                         href={item.href}
                         aria-current={pathname === item.href ? "page" : undefined}
-                        className="group flex items-baseline gap-4 py-1 font-[family-name:var(--font-display)] text-[clamp(2.6rem,11vw,5rem)] font-semibold leading-[1.02] tracking-[-0.04em]"
+                        className="group flex items-baseline gap-4 py-1 font-[family-name:var(--font-display)] text-[clamp(2.6rem,11vw,5rem)] font-black leading-[1.02] tracking-[-0.04em]"
                       >
                         <span className="w-8 text-xs font-normal tracking-normal text-bronze">{pad(i + 1)}</span>
                         <span className={cn("transition-colors", pathname === item.href ? "text-bronze" : "text-bone group-active:text-bronze")}>{item.label}</span>

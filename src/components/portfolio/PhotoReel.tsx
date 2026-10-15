@@ -5,9 +5,10 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { photos, photoCategories } from "@/data/photography";
-import { asset } from "@/lib/assets";
+import { asset, placeholder } from "@/lib/assets";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { HoverDistort } from "@/components/effects/HoverDistort";
+import { ShutterButton } from "@/components/contact-sheet/Viewfinder";
 
 /** Curated frames from the photography archive (all from the current portfolio). */
 const picks = [
@@ -156,17 +157,17 @@ export function PhotoReel() {
   }, []);
 
   return (
-    <section aria-labelledby="photo-reel-title" className="relative overflow-hidden bg-ink-2 py-24 md:py-36">
+    <section data-clip="Photography" aria-labelledby="photo-reel-title" className="relative overflow-hidden bg-ink-2 py-24 md:py-36">
       <div className="container-x mb-14 flex flex-col justify-between gap-8 md:mb-20 md:flex-row md:items-end">
         <div>
-          <SectionLabel index="04">Our photography</SectionLabel>
+          <SectionLabel index="05">Our photography</SectionLabel>
           <h2 id="photo-reel-title" className="display-lg mt-8">
             Port<span className="serif-accent text-bronze">folio</span>
           </h2>
         </div>
         <div className="max-w-sm">
           <p className="text-bone/65">
-            Food, product, fashion, jewellery, hospitality, interiors and architecture — photographed for brands across Sri Lanka.
+            Tactile luxury across Gastronomy, Architecture, and High Fashion.
           </p>
           <Link href="/photography" className="group mt-8 inline-flex items-center gap-3 text-sm uppercase tracking-[0.2em] text-bone">
             <span className="link-underline">Explore the archive</span>
@@ -188,13 +189,15 @@ export function PhotoReel() {
                 key={`${copy}-${p.src}`}
                 aria-hidden={copy === 1}
                 className="group relative h-[min(48svh,380px)] shrink-0 md:h-[min(62svh,600px)]"
-                style={{ aspectRatio: `${p.width} / ${p.height}` }}
+                style={{ aspectRatio: `${p.width} / ${p.height}`, backgroundColor: placeholder(p.src) }}
               >
                 <Link
                   href={`/photography?category=${p.category}#gallery`}
                   tabIndex={copy === 1 ? -1 : undefined}
-                  data-cursor="view"
+                  data-cursor="hidden"
                   data-distort-root
+                  data-shot={p.src}
+                  data-shot-alt={p.alt}
                   draggable={false}
                   className="absolute inset-0 overflow-hidden"
                 >
@@ -202,13 +205,14 @@ export function PhotoReel() {
                     src={p.src}
                     alt={copy === 1 ? "" : p.alt}
                     fill
-                    loading="eager"
+                    loading={copy === 0 && i < 4 ? "eager" : "lazy"}
                     draggable={false}
                     sizes={`(min-width: 768px) ${Math.round((62 * p.width) / p.height)}vh, ${Math.round((48 * p.width) / p.height)}vh`}
                     className="object-cover transition-transform duration-[1400ms] ease-[var(--ease-expo)] group-hover:scale-105"
                   />
                   <HoverDistort />
                 </Link>
+                <ShutterButton tabIndex={copy === 1 ? -1 : undefined} />
                 <figcaption className="absolute -bottom-9 left-0 flex w-full justify-between text-xs uppercase tracking-[0.2em] text-bone/55">
                   <span>{labelFor(p.category)}</span>
                   <span className="tabular-nums">{String(i + 1).padStart(2, "0")}</span>

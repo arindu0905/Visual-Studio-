@@ -4,6 +4,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { Play } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { site } from "@/data/site";
+import { optimizedSrc } from "@/lib/media";
 import { ShowreelModal } from "@/components/ui/ShowreelModal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Reveal } from "@/components/animations/Reveal";
@@ -31,10 +32,10 @@ export function ShowreelBand() {
   }, [reduce]);
 
   return (
-    <section aria-labelledby="reel-title" className="relative py-28 md:py-40">
+    <section data-clip="Showreel" aria-labelledby="reel-title" className="relative py-28 md:py-40">
       <div className="container-x mb-14 grid gap-8 md:mb-20 md:grid-cols-12">
         <div className="md:col-span-6">
-          <SectionLabel index="05">Videography</SectionLabel>
+          <SectionLabel index="07">Videography</SectionLabel>
           <h2 id="reel-title" className="display-md mt-8 max-w-[14ch]">
             Our videography <span className="serif-accent text-bronze">showreel</span>
           </h2>
@@ -56,7 +57,7 @@ export function ShowreelBand() {
           <video
             ref={videoRef}
             src={`${site.media.showreel}#t=${site.media.showreelLoop[0]}`}
-            poster={site.media.poster}
+            poster={optimizedSrc(site.media.poster)}
             muted
             loop
             playsInline
@@ -71,11 +72,8 @@ export function ShowreelBand() {
             </span>
           </span>
           <span className="container-x absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-4 pb-6 text-left md:pb-10">
-            {site.videography.manifesto.map((m) => (
-              <span key={m} className="font-[family-name:var(--font-display)] text-xl font-medium tracking-[-0.03em] text-bone md:text-4xl">
-                {m}
-              </span>
-            ))}
+            <span className="font-[family-name:var(--font-display)] text-xl font-black uppercase tracking-[-0.03em] text-bone md:text-4xl">Play showreel</span>
+            <span className="text-xs font-bold uppercase tracking-[0.05em] text-bronze">100% In-House Production</span>
           </span>
         </motion.button>
       </div>

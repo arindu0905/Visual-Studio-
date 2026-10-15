@@ -4,6 +4,10 @@ import { MotionConfig } from "framer-motion";
 import { createContext, useCallback, useContext, useState, type ReactNode } from "react";
 import { Preloader } from "./Preloader";
 import { SmoothScroll } from "./SmoothScroll";
+import { DevelopObserver } from "@/components/effects/DevelopObserver";
+import { Timeline } from "@/components/effects/Timeline";
+import { ContactSheetProvider } from "@/components/contact-sheet/ContactSheet";
+import { Viewfinder } from "@/components/contact-sheet/Viewfinder";
 
 const IntroContext = createContext(true);
 
@@ -19,8 +23,13 @@ export function Providers({ children }: { children: ReactNode }) {
     <MotionConfig reducedMotion="user" transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
       <IntroContext.Provider value={introDone}>
         <SmoothScroll />
+        <DevelopObserver />
         <Preloader onDone={done} />
-        {children}
+        <ContactSheetProvider>
+          {children}
+          <Viewfinder />
+          <Timeline />
+        </ContactSheetProvider>
       </IntroContext.Provider>
     </MotionConfig>
   );

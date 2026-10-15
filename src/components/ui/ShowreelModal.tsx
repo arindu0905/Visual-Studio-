@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { site } from "@/data/site";
+import { optimizedSrc } from "@/lib/media";
 import { EASE_IN_OUT } from "@/lib/utils";
 
 /** Full-screen showreel player (native controls, sound on). */
@@ -55,7 +56,7 @@ export function ShowreelModal({ open, onClose }: { open: boolean; onClose: () =>
           </button>
           <video
             src={site.media.showreel}
-            poster={site.media.poster}
+            poster={optimizedSrc(site.media.poster)}
             controls
             autoPlay
             playsInline

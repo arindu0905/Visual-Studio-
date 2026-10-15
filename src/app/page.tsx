@@ -7,6 +7,10 @@ import { PhotoReel } from "@/components/portfolio/PhotoReel";
 import { ShowreelBand } from "@/components/sections/ShowreelBand";
 import { Clients } from "@/components/sections/Clients";
 import { CTA } from "@/components/sections/CTA";
+import { KineticBand } from "@/components/sections/KineticBand";
+import { Philosophy } from "@/components/sections/Philosophy";
+import { Impact } from "@/components/sections/Impact";
+import { GradeCompare } from "@/components/sections/GradeCompare";
 import { site, socials } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -37,11 +41,15 @@ export default function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Hero />
+      <KineticBand />
       <AboutIntro />
+      <Philosophy />
       <ServicesSection />
       <SelectedWork />
       <PhotoReel />
+      <GradeCompare />
       <ShowreelBand />
+      <Impact />
       <Clients />
       <CTA />
     </>

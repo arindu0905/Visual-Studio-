@@ -12,7 +12,7 @@ type Props = {
 /** Shared typographic header for inner pages. */
 export function PageHero({ eyebrow, title, intro, children }: Props) {
   return (
-    <section className="relative pb-16 pt-36 md:pb-24 md:pt-52">
+    <section data-clip="Intro" className="relative pb-16 pt-36 md:pb-24 md:pt-52">
       <div className="container-x">
         <Reveal y={12}>
           <p className="eyebrow flex items-center gap-3">

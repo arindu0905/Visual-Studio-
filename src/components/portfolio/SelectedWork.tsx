@@ -1,4 +1,6 @@
 import { projects } from "@/data/projects";
+import { cases } from "@/data/cases";
+import { CaseList } from "./CaseList";
 import { ProjectCard } from "./ProjectCard";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { SplitText } from "@/components/animations/SplitText";
@@ -15,16 +17,16 @@ const layout = [
 
 export function SelectedWork() {
   return (
-    <section aria-labelledby="work-title" className="relative py-28 md:py-40">
+    <section data-clip="Work" aria-labelledby="work-title" className="relative py-28 md:py-40">
       <div className="container-x">
         <div className="mb-16 flex flex-col gap-8 md:mb-28 md:flex-row md:items-end md:justify-between">
           <div>
-            <SectionLabel index="03">Selected work</SectionLabel>
-            <SplitText as="h2" id="work-title" text="Latest projects" className="display-lg mt-8" />
+            <SectionLabel index="04">Selected works preview</SectionLabel>
+            <SplitText as="h2" id="work-title" text="Crafted for screen, built for cultural impact." className="display-lg mt-8" />
           </div>
           <Reveal className="max-w-sm">
             <p className="text-bone/65">
-              We’re passionate about video production — a full scale production team in house, from first frame to final cut.
+              Every client brief is treated as a growth partnership. We blend high-fashion visual standards with aggressive social media reach, high-velocity turnaround, and conversion-driven storytelling.
             </p>
           </Reveal>
         </div>
@@ -36,9 +38,11 @@ export function SelectedWork() {
           })}
         </div>
 
+        <CaseList items={cases.slice(0, 3)} summary className="mt-28 md:mt-44" />
+
         <div className="mt-24 flex justify-center md:mt-36">
           <ButtonLink href="/work" variant="outline">
-            View all work
+            View all projects &amp; campaigns
           </ButtonLink>
         </div>
       </div>

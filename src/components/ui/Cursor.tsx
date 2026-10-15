@@ -81,8 +81,8 @@ export function Cursor() {
           width: size,
           height: size,
           opacity: visible && state !== "hidden" ? 1 : 0,
-          backgroundColor: label ? "rgba(188,153,126,1)" : state === "link" ? "rgba(237,234,228,0)" : "rgba(237,234,228,1)",
-          borderColor: state === "link" ? "rgba(237,234,228,0.8)" : "rgba(237,234,228,0)",
+          backgroundColor: label ? "rgba(223,255,36,1)" : state === "link" ? "rgba(244,244,245,0)" : "rgba(244,244,245,1)",
+          borderColor: state === "link" ? "rgba(244,244,245,0.8)" : "rgba(244,244,245,0)",
         }}
         transition={{ type: "spring", stiffness: 400, damping: 32 }}
         style={{ borderWidth: 1, borderStyle: "solid", mixBlendMode: label ? "normal" : "difference" }}
@@ -94,7 +94,7 @@ export function Cursor() {
               initial={{ opacity: 0, scale: 0.6 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.6 }}
-              className="text-[0.7rem] font-medium uppercase tracking-[0.2em] text-ink"
+              className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-ink"
             >
               {label}
             </motion.span>

@@ -5,17 +5,19 @@ export const site = {
   shortName: "Visual Studios +",
   url: "https://visualstudiosplus.com",
   tagline: "We create content meant to be experienced. Not simply consumed.",
-  headline: { lead: "The", rotating: ["Digital", "Creative", "Marketing"], tail: "Agency" },
+  eyebrow: "Visual Studios+ · Creative Agency",
+  intro:
+    "Colombo’s premier digital marketing, social media campaigns, and content creation agency. We partner with ambitious brands to command attention and deliver verified commercial growth.",
+  headline: { lead: "We create content", rotating: ["that moves"], tail: "brands." },
   description:
-    "Visual Studios Plus is a Colombo-based content creation and curation digital marketing agency — photography, videography, social, paid media and branding strategy.",
+    "Visual Studios Plus is a Colombo-based content creation and curation digital marketing agency — photography, videography, social, paid media, CGI and branding strategy.",
   about: {
-    statement: "We are Colombo’s leading content creation and curation digital marketing agency.",
-    body: "Partnering with ambitious startups and established brands, we utilise Visual Content to create a positive brand presence in the new retail landscape.",
+    statement: "Premier content creation and curation agency based in Colombo.",
+    body: "Visual Studios Plus has earned an industry-leading reputation for exceptional work in commercial videography, advertising photography, and social viral content creation, specializing in competitive consumer sectors such as FMCG, Food & Beverage, Fashion, and Luxury Hospitality.",
   },
   videography: {
-    statement:
-      "We’re passionate about video production. We have a full scale production team in house to deliver an outstanding outcome consistently.",
-    manifesto: ["We make it smart.", "We make it beautiful.", "We have fun."],
+    statement: "Cinema-grade visual storytelling engineered to stop the infinite scroll and command cultural attention.",
+    manifesto: ["We create.", "We strategize.", "We execute.", "We amplify.", "We measure.", "We grow."],
   },
   contact: {
     email: "info@visualstudiosplus.com",
@@ -33,13 +35,12 @@ export const site = {
 
 export type Social = { label: string; href: string };
 
-/**
- * Only links that could be verified are listed. The current site also shows
- * Instagram, Pinterest and X icons but without URLs — add them here when known.
- */
+/** Social channels as linked from the demo site (plus the verified Facebook page). */
 export const socials: Social[] = [
-  { label: "Behance", href: "https://www.behance.net/visual-studios" },
   { label: "YouTube", href: "https://www.youtube.com/@visualstudiosplus" },
+  { label: "Instagram", href: "https://instagram.com/visualstudiosplus" },
+  { label: "LinkedIn", href: "https://linkedin.com/company/visualstudiosplus" },
+  { label: "Behance", href: "https://behance.net/visualstudiosplus" },
   { label: "Facebook", href: "https://www.facebook.com/visualstudiosplus/" },
 ];
 

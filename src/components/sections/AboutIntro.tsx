@@ -8,9 +8,9 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 
 export function AboutIntro() {
   return (
-    <section aria-labelledby="about-title" className="relative py-28 md:py-44">
+    <section data-clip="Studio" aria-labelledby="about-title" className="relative py-28 md:py-44">
       <div className="container-x">
-        <SectionLabel index="01">About us</SectionLabel>
+        <SectionLabel index="01">Agency profile &amp; heritage</SectionLabel>
         <h2 id="about-title" className="sr-only">
           About Visual Studios Plus
         </h2>
@@ -18,7 +18,7 @@ export function AboutIntro() {
         <ScrollHighlight
           text={site.about.statement}
           accent={["content", "creation", "curation"]}
-          className="mt-10 max-w-[18ch] font-[family-name:var(--font-display)] text-[clamp(2.4rem,6.4vw,7rem)] font-medium leading-[0.98] tracking-[-0.04em]"
+          className="mt-10 max-w-[18ch] font-[family-name:var(--font-display)] text-[clamp(2.4rem,6.4vw,7rem)] font-bold leading-[0.98] tracking-[-0.04em]"
         />
 
         <div className="mt-20 grid gap-12 md:mt-32 md:grid-cols-12 md:gap-8">
@@ -47,16 +47,16 @@ export function AboutIntro() {
             <Reveal delay={0.1} className="mt-10 grid grid-cols-2 gap-6 border-t border-line pt-8 text-sm">
               <div>
                 <p className="eyebrow mb-2">Disciplines</p>
-                <p className="text-bone/80">Photography, Videography, Strategy</p>
+                <p className="text-bone/80">Videography &amp; TVC, Commercial Photo, Digital Retainers</p>
               </div>
               <div>
                 <p className="eyebrow mb-2">Based in</p>
-                <p className="text-bone/80">Colombo, Sri Lanka</p>
+                <p className="text-bone/80">Colombo 04, Sri Lanka</p>
               </div>
             </Reveal>
             <Reveal delay={0.2} className="mt-10">
               <ButtonLink href="/about" variant="outline">
-                More about the studio
+                About Studio
               </ButtonLink>
             </Reveal>
           </div>

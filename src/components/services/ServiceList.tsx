@@ -43,7 +43,7 @@ export function ServiceList({ services }: { services: Service[] }) {
                 {pad(i + 1)}
               </span>
               <span className="relative">
-                <span className="block font-[family-name:var(--font-display)] text-[clamp(1.9rem,5.2vw,5.2rem)] font-medium leading-none tracking-[-0.04em] transition-transform duration-700 ease-[var(--ease-expo)] group-hover:translate-x-4 md:group-hover:translate-x-8">
+                <span className="block font-[family-name:var(--font-display)] text-[clamp(1.9rem,5.2vw,5.2rem)] font-bold leading-none tracking-[-0.04em] transition-transform duration-700 ease-[var(--ease-expo)] group-hover:translate-x-4 md:group-hover:translate-x-8">
                   {s.title}
                 </span>
                 <span className="mt-3 block max-w-md text-sm leading-relaxed text-bone/55 md:hidden">{s.summary}</span>

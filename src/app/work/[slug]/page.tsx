@@ -52,7 +52,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
 
   return (
     <>
-      <article>
+      <article data-clip="Film">
         <header className="pb-14 pt-32 md:pb-20 md:pt-44">
           <div className="container-x">
             <Reveal y={10}>
@@ -99,14 +99,14 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
           <SplitText
             as="p"
             text={project.summary}
-            className="font-[family-name:var(--font-display)] text-[clamp(1.8rem,3.8vw,3.6rem)] font-medium leading-[1.08] tracking-[-0.03em] md:col-span-9"
+            className="font-[family-name:var(--font-display)] text-[clamp(1.8rem,3.8vw,3.6rem)] font-bold leading-[1.08] tracking-[-0.03em] md:col-span-9"
             stagger={0.025}
           />
         </section>
       </article>
 
       {/* Next project */}
-      <nav aria-label="Next project" className="border-t border-line">
+      <nav data-clip="Next" aria-label="Next project" className="border-t border-line">
         <Link href={`/work/${next.slug}`} data-cursor="view" className="group relative block overflow-hidden">
           <div className="absolute inset-0">
             <Image

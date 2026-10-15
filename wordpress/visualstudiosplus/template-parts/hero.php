@@ -9,7 +9,7 @@ $vsp_site  = vsp_site();
 $vsp_h     = $vsp_site['headline'];
 $vsp_words = $vsp_h['rotating'] ? $vsp_h['rotating'] : array( '' );
 $vsp_long  = array_reduce( $vsp_words, fn( $a, $b ) => mb_strlen( $a ) >= mb_strlen( $b ) ? $a : $b, '' );
-$vsp_rotating = '<span class="rotating-word serif-accent relative inline-grid overflow-hidden pr-[0.08em] align-bottom text-bronze" data-rotate>'
+$vsp_rotating = '<span class="rotating-word serif-accent relative inline-grid overflow-hidden pr-[0.08em] align-bottom" data-rotate>'
 	. '<span aria-hidden="true" class="invisible col-start-1 row-start-1">' . esc_html( $vsp_long ) . '</span>';
 foreach ( $vsp_words as $vsp_i => $vsp_w ) {
 	$vsp_rotating .= '<span aria-hidden="true" class="rw-word col-start-1 row-start-1' . ( 0 === $vsp_i ? ' is-active' : '' ) . '">' . esc_html( $vsp_w ) . '</span>';

@@ -89,7 +89,7 @@
     font-weight: 900;
     letter-spacing: -0.045em;
     line-height: 0.92;
-    font-size: clamp(3.4rem, 12.5vw, 13.5rem);
+    font-size: clamp(2.6rem, 12.5vw, 13.5rem);
   }
 
   .display-lg {

@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
+    // Photos rarely change: keep optimized versions cached for 31 days instead of re-encoding.
+    minimumCacheTTL: 2678400,
     remotePatterns: [
       // Current Visual Studios Plus media library (see src/lib/assets.ts)
       { protocol: "https", hostname: "visualstudiosplus.com", pathname: "/wp-content/uploads/**" },
