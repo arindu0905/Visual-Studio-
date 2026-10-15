@@ -36,7 +36,7 @@ export function ProjectCard({ project, index, aspect = "aspect-[16/10]", sizes, 
         </div>
         <Reveal y={20} className="mt-5 flex items-start justify-between gap-6 border-t border-line pt-5">
           <div>
-            <h3 className="font-[family-name:var(--font-display)] text-2xl font-medium leading-tight tracking-[-0.03em] transition-colors duration-500 group-hover:text-bronze md:text-3xl">
+            <h3 className="font-[family-name:var(--font-display)] text-2xl font-bold leading-tight tracking-[-0.03em] transition-colors duration-500 group-hover:text-bronze md:text-3xl">
               {project.title}
             </h3>
             <p className="mt-1.5 text-sm text-bone/55">{project.category}</p>

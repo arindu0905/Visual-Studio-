@@ -11,7 +11,7 @@ import { CTA } from "@/components/sections/CTA";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Videography, photography, social media strategy, paid media strategy and branding strategy from Visual Studios Plus, Colombo.",
+    "Strategy, social media, digital campaigns, content creation, photography, videography, branding, TVC and CGI / AI creative from Visual Studios Plus, Colombo.",
   alternates: { canonical: "/services" },
   openGraph: { title: `Services — ${site.name}`, url: "/services" },
 };
@@ -20,9 +20,9 @@ export default function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Services"
-        title="Made to be experienced."
-        intro="Partnering with ambitious startups and established brands, we use visual content to create a positive brand presence — and the strategy to put it to work."
+        eyebrow="End-to-end capabilities & production disciplines"
+        title="Studio services."
+        intro="6 core studio disciplines engineered under one roof in Colombo 04. Fast turnarounds, broadcast color grading, and organic social dominance."
       />
 
       {/* Index */}
@@ -44,7 +44,7 @@ export default function ServicesPage() {
 
       <div className="border-t border-line">
         {services.map((s, i) => (
-          <section key={s.slug} id={s.slug} aria-labelledby={`${s.slug}-title`} className="scroll-mt-24 border-b border-line py-20 md:py-32">
+          <section key={s.slug} data-clip={s.title} id={s.slug} aria-labelledby={`${s.slug}-title`} className="scroll-mt-24 border-b border-line py-20 md:py-32">
             <div className="container-x grid gap-10 md:grid-cols-12 md:gap-8">
               <div className={cn("md:col-span-5", i % 2 === 1 && "md:order-2 md:col-start-8")}>
                 <div className="md:sticky md:top-32">
@@ -82,7 +82,11 @@ export default function ServicesPage() {
         ))}
       </div>
 
-      <CTA />
+      <CTA
+        title="Capabilities built for end-to-end commercial momentum."
+        text="Need a custom agency retainer or dedicated production team? We work on project-by-project commissions and full-year creative retainers."
+        button="Inquire capabilities"
+      />
     </>
   );
 }

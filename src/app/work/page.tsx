@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { projects } from "@/data/projects";
+import { cases } from "@/data/cases";
+import { CaseList } from "@/components/portfolio/CaseList";
 import { photoCategories, photos } from "@/data/photography";
 import { site } from "@/data/site";
 import { cn, pad } from "@/lib/utils";
@@ -33,16 +35,16 @@ export default function WorkPage() {
   return (
     <>
       <PageHero
-        eyebrow={`Work — ${projects.length} films · ${photos.length} photographs`}
-        title="Selected work."
-        intro="Hospitality, food, product and corporate films produced by our in-house team — and an archive of photography across five disciplines."
+        eyebrow="Commercial work & campaign archive"
+        title="Our work & projects."
+        intro="High-impact commercial films, viral social campaigns, FMCG storytelling, and brand imagery created by Visual Studios Plus for market-leading brands."
       />
 
-      <section aria-labelledby="films-title" className="pb-28 md:pb-40">
+      <section data-clip="Films" aria-labelledby="films-title" className="pb-28 md:pb-40">
         <div className="container-x">
           <div className="mb-14 flex items-end justify-between border-b border-line pb-6">
             <h2 id="films-title" className="eyebrow">
-              <span className="text-bronze">(A)</span> Films
+              <span className="text-bronze">(A)</span> TVC &amp; Films
             </h2>
             <a href="https://www.youtube.com/@visualstudiosplus" target="_blank" rel="noopener noreferrer" className="eyebrow link-underline text-bone/70 hover:text-bone">
               YouTube channel ↗
@@ -57,11 +59,29 @@ export default function WorkPage() {
         </div>
       </section>
 
-      <section aria-labelledby="photo-title" className="bg-ink-2 py-28 md:py-40">
+      <section data-clip="Case studies" aria-labelledby="cases-title" className="pb-28 md:pb-40">
+        <div className="container-x">
+          <div className="mb-16 grid gap-8 md:mb-20 md:grid-cols-12">
+            <div className="md:col-span-7">
+              <SectionLabel index="B">Flagship portfolio</SectionLabel>
+              <SplitText as="h2" id="cases-title" text="Projects engineered for verifiable business impact." className="display-lg mt-8" />
+            </div>
+            <Reveal className="self-end md:col-span-4 md:col-start-9">
+              <p className="text-lg text-bone/70">
+                Every client brief is treated as a growth partnership. We blend high-fashion visual standards with aggressive social media reach,
+                high-velocity turnaround, and conversion-driven storytelling.
+              </p>
+            </Reveal>
+          </div>
+          <CaseList items={cases} />
+        </div>
+      </section>
+
+      <section data-clip="Photography" aria-labelledby="photo-title" className="bg-ink-2 py-28 md:py-40">
         <div className="container-x">
           <div className="mb-16 grid gap-8 md:mb-24 md:grid-cols-12">
             <div className="md:col-span-7">
-              <SectionLabel index="B">Photography</SectionLabel>
+              <SectionLabel index="C">Commercial photography</SectionLabel>
               <SplitText as="h2" id="photo-title" text="The photography archive." className="display-lg mt-8" />
             </div>
             <Reveal className="self-end md:col-span-4 md:col-start-9">
@@ -86,7 +106,7 @@ export default function WorkPage() {
                   />
                   <div className="mt-5 flex items-start justify-between gap-6 border-t border-line pt-5">
                     <div>
-                      <h3 className="font-[family-name:var(--font-display)] text-2xl font-medium tracking-[-0.03em] transition-colors duration-500 group-hover:text-bronze md:text-3xl">
+                      <h3 className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-[-0.03em] transition-colors duration-500 group-hover:text-bronze md:text-3xl">
                         {c.label}
                       </h3>
                       <p className="mt-1.5 text-sm text-bone/55">{countFor(c.id)} photographs</p>
@@ -100,7 +120,10 @@ export default function WorkPage() {
         </div>
       </section>
 
-      <CTA />
+      <CTA
+        text="Looking for custom creative direction, an integrated campaign, or an ongoing social retainer?"
+        button="Start a Project with Visual Studios+"
+      />
     </>
   );
 }

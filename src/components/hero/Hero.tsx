@@ -9,11 +9,20 @@ import { EASE } from "@/lib/utils";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { ShowreelModal } from "@/components/ui/ShowreelModal";
 import { RotatingWord } from "./RotatingWord";
+import { ReactiveText } from "./ReactiveText";
+import { Spotlight } from "./Spotlight";
 import { useIntroDone } from "@/components/layout/Providers";
 
 const line = {
   hidden: { y: "105%" },
   show: (i: number) => ({ y: "0%", transition: { duration: 1.1, ease: EASE, delay: 0.1 + i * 0.1 } }),
+};
+
+// The intro paragraph is the largest text block: keep it painted from the first frame
+// (under the intro curtain) and only slide it, so it counts as visible immediately.
+const slide = {
+  hidden: { y: 20 },
+  show: (d: number) => ({ y: 0, transition: { duration: 0.7, ease: EASE, delay: d } }),
 };
 
 const fade = {
@@ -29,6 +38,8 @@ export function Hero() {
   const play = introDone ? "show" : "hidden";
   const [reelOpen, setReelOpen] = useState(false);
   const [playVideo, setPlayVideo] = useState(false);
+  // Once the headline has slid in, open the line masks so reactive letters can lift freely.
+  const [revealed, setRevealed] = useState(false);
   const closeReel = useCallback(() => setReelOpen(false), []);
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -40,7 +51,9 @@ export function Hero() {
   useEffect(() => {
     const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced || conn?.saveData) return;
+    // Phones get the still poster: the reel is a large download on mobile data.
+    const small = window.matchMedia("(max-width: 767px)").matches;
+    if (reduced || small || conn?.saveData) return;
     // Start streaming the reel only after the page has finished loading, so it never
     // competes with the headline, fonts and poster image for bandwidth.
     let id: number | undefined;
@@ -69,7 +82,7 @@ export function Hero() {
   }, [start, end]);
 
   return (
-    <section ref={ref} aria-labelledby="hero-title" className="relative flex min-h-[100svh] flex-col overflow-hidden">
+    <section ref={ref} data-clip="Opening" aria-labelledby="hero-title" className="relative flex min-h-[100svh] flex-col overflow-hidden">
       {/* Background */}
       <motion.div className="absolute inset-0" style={{ y: reduce ? 0 : bgY }}>
         <motion.div
@@ -96,29 +109,43 @@ export function Hero() {
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/30 to-ink" />
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-ink/80 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_80%,rgba(10,10,10,0.75),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_80%,rgba(12,14,12,0.75),transparent_60%)]" />
       </motion.div>
       <div aria-hidden className="grain pointer-events-none absolute inset-0 overflow-hidden" />
+      <Spotlight />
 
       {/* Content */}
       <motion.div style={{ y: reduce ? 0 : contentY, opacity: fadeOut }} className="container-x relative z-10 flex flex-1 flex-col justify-end pb-24 pt-32 md:pb-24 md:pt-36">
         <motion.p initial="hidden" animate={play} custom={0.05} variants={fade} className="eyebrow mb-6 flex items-center gap-3 text-bone/70 md:mb-10">
           <span className="size-1.5 rounded-full bg-bronze" aria-hidden />
-          Colombo, Sri Lanka — Photography · Videography · Strategy
+          {site.eyebrow}
         </motion.p>
 
-        <h1 id="hero-title" className="display-xl text-[clamp(3.4rem,min(12.5vw,16svh),13.5rem)]">
+        <h1 id="hero-title" className="display-xl text-[clamp(2.9rem,min(9.6vw,14svh),11.5rem)]">
           <span className="sr-only">
             {site.headline.lead} {site.headline.rotating.join(" ")} {site.headline.tail}
           </span>
           <span aria-hidden className="block">
             {[
-              <span key="a">{site.headline.lead}</span>,
-              <RotatingWord key="b" words={site.headline.rotating} className="serif-accent pr-[0.08em] text-bronze" />,
-              <span key="c">{site.headline.tail}</span>,
+              <ReactiveText key="a" text={site.headline.lead} />,
+              site.headline.rotating.length > 1 ? (
+                <RotatingWord key="b" words={site.headline.rotating} className="serif-accent pr-[0.08em]" />
+              ) : (
+                <span key="b" className="serif-accent pr-[0.08em]">
+                  <ReactiveText text={site.headline.rotating[0] ?? ""} />
+                </span>
+              ),
+              <ReactiveText key="c" text={site.headline.tail} />,
             ].map((content, i) => (
-              <span key={i} className="block overflow-hidden pb-[0.06em]">
-                <motion.span className="block" initial="hidden" animate={play} custom={i} variants={line}>
+              <span key={i} className={`block pb-[0.06em] ${revealed ? "overflow-visible" : "overflow-hidden"}`}>
+                <motion.span
+                  className="block"
+                  initial="hidden"
+                  animate={play}
+                  custom={i}
+                  variants={line}
+                  onAnimationComplete={(def) => i === 2 && def === "show" && setRevealed(true)}
+                >
                   {content}
                 </motion.span>
               </span>
@@ -127,11 +154,11 @@ export function Hero() {
         </h1>
 
         <div className="mt-10 flex flex-col gap-8 md:mt-14 md:flex-row md:items-end md:justify-between">
-          <motion.p initial="hidden" animate={play} custom={0.25} variants={fade} className="max-w-md text-lg leading-relaxed text-bone/80 md:text-xl">
-            {site.tagline}
+          <motion.p initial="hidden" animate={play} custom={0.25} variants={slide} className="max-w-xl text-lg leading-relaxed text-bone/80 md:text-xl">
+            {site.intro}
           </motion.p>
           <motion.div initial="hidden" animate={play} custom={0.35} variants={fade} className="flex flex-wrap items-center gap-3">
-            <ButtonLink href="/work">View our work</ButtonLink>
+            <ButtonLink href="/work">Explore projects</ButtonLink>
             <button
               type="button"
               onClick={() => setReelOpen(true)}

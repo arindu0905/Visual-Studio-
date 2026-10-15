@@ -8,6 +8,9 @@ import { createPortal } from "react-dom";
 import { photoCategories, photos, type PhotoCategoryId } from "@/data/photography";
 import { cn, EASE } from "@/lib/utils";
 import { Tilt } from "@/components/effects/Tilt";
+import { ShutterButton } from "@/components/contact-sheet/Viewfinder";
+import { useContactSheet } from "@/components/contact-sheet/ContactSheet";
+import { placeholder } from "@/lib/assets";
 
 type Filter = "all" | PhotoCategoryId;
 const PAGE = 24;
@@ -67,10 +70,15 @@ export function PhotoGallery({ initial = "all" }: { initial?: Filter }) {
             transition={{ duration: 0.9, ease: EASE, delay: (i % 3) * 0.06 }}
           >
             <Tilt>
+            <div className="group relative">
             <button
               type="button"
               onClick={() => setLightbox(i)}
-              data-cursor="view"
+              data-cursor="hidden"
+              data-develop
+              data-shot={p.src}
+              data-shot-alt={p.alt}
+              style={{ backgroundColor: placeholder(p.src) }}
               aria-label={`Open ${p.alt}`}
               className="group relative block w-full overflow-hidden bg-ink-3"
             >
@@ -87,6 +95,8 @@ export function PhotoGallery({ initial = "all" }: { initial?: Filter }) {
                 <span className="tabular-nums text-bone/70">{String(i + 1).padStart(3, "0")}</span>
               </span>
             </button>
+            <ShutterButton />
+            </div>
             </Tilt>
           </motion.li>
         ))}
@@ -113,6 +123,8 @@ function Lightbox({ items, index, onChange }: { items: typeof photos; index: num
   const [mounted, setMounted] = useState(false);
   const [dir, setDir] = useState(0);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const shotRef = useRef<HTMLDivElement>(null);
+  const sheet = useContactSheet();
   useEffect(() => setMounted(true), []);
 
   const go = useCallback(
@@ -169,6 +181,15 @@ function Lightbox({ items, index, onChange }: { items: typeof photos; index: num
               {String(index + 1).padStart(3, "0")} / {String(items.length).padStart(3, "0")} —{" "}
               {photoCategories.find((c) => c.id === item.category)?.label}
             </p>
+            <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => shotRef.current && sheet?.shoot(shotRef.current)}
+              className="inline-flex items-center gap-2 rounded-full bg-bronze px-4 py-2 text-xs font-bold uppercase tracking-[0.05em] text-ink transition-transform hover:scale-105"
+            >
+              <span aria-hidden className="size-2 rounded-full bg-ink" />
+              {sheet?.frames.some((f) => f.src === item.src) ? "On your sheet" : "Shoot this frame"}
+            </button>
             <button
               ref={closeRef}
               type="button"
@@ -177,6 +198,7 @@ function Lightbox({ items, index, onChange }: { items: typeof photos; index: num
             >
               Close <X aria-hidden className="size-4" />
             </button>
+            </div>
           </div>
 
           <div className="relative flex-1 overflow-hidden" onClick={() => onChange(null)}>
@@ -197,11 +219,21 @@ function Lightbox({ items, index, onChange }: { items: typeof photos; index: num
                   else if (info.offset.x > 80) go(-1);
                 }}
               >
-                <div className="relative size-full" onClick={(e) => e.stopPropagation()}>
+                <div ref={shotRef} data-shot={item.src} data-shot-alt={item.alt} className="relative size-full" onClick={(e) => e.stopPropagation()}>
                   <Image src={item.src} alt={item.alt} fill sizes="100vw" className="object-contain" draggable={false} />
                 </div>
               </motion.div>
             </AnimatePresence>
+
+            {/* Preload the neighbours at the same size the viewer uses, so arrowing is instant. */}
+            {[-1, 1].map((d) => {
+              const n = items[(index + d + items.length) % items.length];
+              return (
+                <div key={`pre-${d}-${n.src}`} aria-hidden className="pointer-events-none absolute left-0 top-0 size-px overflow-hidden opacity-0">
+                  <Image src={n.src} alt="" fill sizes="100vw" loading="eager" />
+                </div>
+              );
+            })}
 
             <button
               type="button"

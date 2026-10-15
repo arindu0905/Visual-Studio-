@@ -50,7 +50,7 @@ export default async function PhotographyPage({ searchParams }: { searchParams: 
           </div>
         </div>
       </PhotoWall>
-      <section id="gallery" aria-label="Photography gallery" className="container-x scroll-mt-4 pb-28 pt-16 md:pb-40 md:pt-24">
+      <section data-clip="Archive" id="gallery" aria-label="Photography gallery" className="container-x scroll-mt-4 pb-28 pt-16 md:pb-40 md:pt-24">
         <PhotoGallery initial={initial} />
       </section>
       <CTA title="Have a product, a place or a plate to shoot?" />

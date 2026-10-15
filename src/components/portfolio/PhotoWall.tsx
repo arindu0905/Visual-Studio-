@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { photos } from "@/data/photography";
 import { cn } from "@/lib/utils";
+import { placeholder } from "@/lib/assets";
 
 /** Interleave photos into N columns so each column mixes categories. */
 function columns(count: number, perCol: number) {
@@ -22,7 +23,7 @@ const speeds = ["70s", "95s", "80s", "105s", "88s"];
 export function PhotoWall({ children }: { children: ReactNode }) {
   const cols = columns(5, 6);
   return (
-    <section className="relative h-[100svh] min-h-[600px] overflow-hidden bg-ink">
+    <section data-clip="Intro" className="relative h-[100svh] min-h-[600px] overflow-hidden bg-ink">
       <div aria-hidden className="absolute inset-0 -top-[10%] flex gap-3 px-3 md:gap-5 md:px-5 [transform:rotate(-4deg)_scale(1.18)]">
         {cols.map((col, c) => (
           <div key={c} className={cn("relative flex-1 overflow-hidden", c === 3 && "hidden md:block", c === 4 && "hidden lg:block")}>
@@ -31,7 +32,7 @@ export function PhotoWall({ children }: { children: ReactNode }) {
               style={{ "--d": speeds[c], animationDirection: c % 2 ? "reverse" : "normal" } as React.CSSProperties}
             >
               {[...col, ...col].map((p, i) => (
-                <div key={`${p.src}-${i}`} className="relative w-full overflow-hidden bg-ink-3" style={{ aspectRatio: `${p.width} / ${p.height}` }}>
+                <div key={`${p.src}-${i}`} className="relative w-full overflow-hidden bg-ink-3" style={{ aspectRatio: `${p.width} / ${p.height}`, backgroundColor: placeholder(p.src) }}>
                   <Image
                     src={p.src}
                     alt=""
@@ -47,7 +48,7 @@ export function PhotoWall({ children }: { children: ReactNode }) {
         ))}
       </div>
       <div aria-hidden className="absolute inset-0 bg-ink/55" />
-      <div aria-hidden className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(10,10,10,0.2),rgba(10,10,10,0.9)_75%)]" />
+      <div aria-hidden className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(12,14,12,0.2),rgba(12,14,12,0.9)_75%)]" />
       <div aria-hidden className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-ink to-transparent" />
       <div className="relative z-10 flex h-full flex-col justify-end">{children}</div>
     </section>

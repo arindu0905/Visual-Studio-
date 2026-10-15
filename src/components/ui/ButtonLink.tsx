@@ -19,7 +19,7 @@ type Props = {
  */
 export function ButtonLink({ href, children, variant = "solid", className, external, magnetic = true }: Props) {
   const classes = cn(
-    "group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-7 py-4 text-sm font-medium tracking-wide transition-colors duration-500",
+    "group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-7 py-4 text-xs font-bold uppercase tracking-[0.05em] transition-colors duration-500",
     variant === "solid" ? "bg-bone text-ink" : "border border-bone/30 text-bone hover:border-bronze",
     className,
   );

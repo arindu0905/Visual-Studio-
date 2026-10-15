@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Instrument_Serif, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/navigation/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -7,10 +6,6 @@ import { Providers } from "@/components/layout/Providers";
 import { Cursor } from "@/components/ui/Cursor";
 import { site } from "@/data/site";
 import { asset } from "@/lib/assets";
-
-const display = Inter_Tight({ subsets: ["latin"], variable: "--font-inter-tight", display: "swap" });
-const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: "italic", variable: "--font-instrument-serif", display: "swap" });
-const sans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -55,7 +50,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
+  themeColor: "#0c0e0c",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
@@ -63,12 +58,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning className={`${display.variable} ${serif.variable} ${sans.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         {/* Skip the intro for repeat visits this session and for reduced motion — runs before first paint. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(sessionStorage.getItem("vsp-intro")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro-seen")}catch(e){}`,
+            __html: `document.documentElement.classList.add("js");try{if(sessionStorage.getItem("vsp-intro")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro-seen")}catch(e){}`,
           }}
         />
         <noscript>

@@ -14,9 +14,10 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-x-6 gap-y-14 md:grid-cols-12 md:gap-8">
           <div className="col-span-2 md:col-span-5">
             <p className="eyebrow mb-6">Visual Studios Plus</p>
-            <p className="max-w-sm font-[family-name:var(--font-display)] text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-4xl">
-              Content meant to be <span className="serif-accent text-bronze">experienced.</span> Not simply consumed.
+            <p className="max-w-sm font-[family-name:var(--font-display)] text-3xl font-bold leading-[1.05] tracking-[-0.03em] md:text-4xl">
+              We create content meant to be <span className="serif-accent text-bronze">experienced.</span> Not simply consumed.
             </p>
+            <p className="mt-6 max-w-sm text-bone/60">Colombo’s premier creative, cinematography, and digital agency.</p>
             <a
               href={`mailto:${site.contact.email}`}
               className="link-underline mt-8 inline-flex items-center gap-2 text-lg text-bone/85 hover:text-bone"
@@ -27,7 +28,7 @@ export function Footer() {
           </div>
 
           <nav aria-label="Footer" className="md:col-span-2 md:col-start-7">
-            <p className="eyebrow mb-5">Navigate</p>
+            <p className="eyebrow mb-5">Navigation</p>
             <ul className="space-y-2.5 text-[0.95rem]">
               {footerNav.map((item) => (
                 <li key={item.href}>
@@ -53,7 +54,7 @@ export function Footer() {
           </div>
 
           <div className="col-span-2 md:col-span-2">
-            <p className="eyebrow mb-5">Studio</p>
+            <p className="eyebrow mb-5">Visit Colombo studio</p>
             <address className="space-y-2.5 text-[0.95rem] not-italic text-bone/70">
               <p>
                 {site.contact.address.map((line) => (
@@ -68,7 +69,7 @@ export function Footer() {
                 </a>
               ))}
             </address>
-            <p className="eyebrow mb-4 mt-8">Follow</p>
+            <p className="eyebrow mb-4 mt-8">Direct channels</p>
             <ul className="space-y-2.5 text-[0.95rem]">
               {socials.map((s) => (
                 <li key={s.label}>
@@ -84,15 +85,28 @@ export function Footer() {
       </div>
 
       {/* Oversized wordmark */}
+      {/* Full studio name, stretched to span the footer edge to edge at any width */}
       <div aria-hidden className="container-x mt-24 select-none md:mt-32">
-        <p className="whitespace-nowrap text-center font-[family-name:var(--font-display)] text-[19.5vw] font-semibold leading-[0.75] tracking-[-0.06em] text-bone/[0.06] md:text-[18vw]">
-          Visual<span className="text-bronze/30">+</span>
-        </p>
+        <svg viewBox="0 0 1600 172" className="block h-auto w-full" preserveAspectRatio="xMidYMid meet">
+          <text
+            x="0"
+            y="164"
+            fontSize="224"
+            fontWeight="900"
+            letterSpacing="-11"
+            textLength="1600"
+            lengthAdjust="spacing"
+            style={{ fontFamily: "var(--font-display)" }}
+            className="fill-bone/[0.06]"
+          >
+            Visual Studios <tspan className="fill-bronze/30">+</tspan>
+          </text>
+        </svg>
       </div>
 
       <div className="container-x flex flex-col items-start justify-between gap-4 border-t border-line py-7 text-xs text-stone sm:flex-row sm:items-center">
         <p>
-          © {year} {site.name}. All rights reserved.
+          © {year} {site.name}. All rights reserved. Made in Colombo.
         </p>
         <p>Colombo, Sri Lanka</p>
         <BackToTop />

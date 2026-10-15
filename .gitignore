@@ -7,3 +7,10 @@ next-env.d.ts
 .DS_Store
 _logs/
 _to_delete/
+
+# WordPress theme build output (npm run wp:build)
+wordpress/dist/
+wordpress/visualstudiosplus/assets/media/
+wordpress/visualstudiosplus/assets/vendor/
+wordpress/visualstudiosplus/assets/css/theme.css
+wordpress/visualstudiosplus/screenshot.jpg
