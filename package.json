@@ -2,13 +2,15 @@
   "name": "visual-studios-plus",
   "version": "1.0.0",
   "private": true,
-  "description": "Visual Studios Plus \u2014 creative agency website (frontend).",
+  "description": "Visual Studios Plus — creative agency website (frontend).",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "assets:download": "node scripts/download-assets.mjs"
+    "assets:download": "node scripts/download-assets.mjs",
+    "wp:css": "node scripts/build-wp-theme.mjs --css-only",
+    "wp:build": "node scripts/build-wp-theme.mjs"
   },
   "dependencies": {
     "framer-motion": "^14.0.0",
@@ -20,6 +22,7 @@
     "react-dom": "^19.3.0"
   },
   "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^22.20.5",
     "@types/react": "^19.3.0",
