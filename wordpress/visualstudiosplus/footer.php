@@ -16,7 +16,7 @@ $vsp_services_url = vsp_page_url( 'services' );
 		<div class="grid grid-cols-2 gap-x-6 gap-y-14 md:grid-cols-12 md:gap-8">
 			<div class="col-span-2 md:col-span-5">
 				<p class="eyebrow mb-6"><?php echo esc_html( $vsp_site['name'] ); ?></p>
-				<p class="max-w-sm font-[family-name:var(--font-display)] text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-4xl">
+				<p class="max-w-sm font-[family-name:var(--font-display)] text-3xl font-bold leading-[1.05] tracking-[-0.03em] md:text-4xl">
 					<?php esc_html_e( 'We create content meant to be', 'vsp' ); ?> <span class="serif-accent text-bronze"><?php esc_html_e( 'experienced.', 'vsp' ); ?></span> <?php esc_html_e( 'Not simply consumed.', 'vsp' ); ?>
 				</p>
 				<p class="mt-6 max-w-sm text-bone/60"><?php esc_html_e( 'Colombo’s premier creative, cinematography, and digital agency.', 'vsp' ); ?></p>
@@ -67,7 +67,7 @@ $vsp_services_url = vsp_page_url( 'services' );
 	</div>
 
 	<div aria-hidden="true" class="container-x mt-24 select-none md:mt-32">
-		<p class="whitespace-nowrap text-center font-[family-name:var(--font-display)] text-[19.5vw] font-semibold leading-[0.75] tracking-[-0.06em] text-bone/[0.06] md:text-[18vw]">Visual<span class="text-bronze/30">+</span></p>
+		<p class="whitespace-nowrap text-center font-[family-name:var(--font-display)] text-[19.5vw] font-black leading-[0.75] tracking-[-0.06em] text-bone/[0.06] md:text-[18vw]">Visual<span class="text-bronze/30">+</span></p>
 	</div>
 
 	<div class="container-x flex flex-col items-start justify-between gap-4 border-t border-line py-7 text-xs text-stone sm:flex-row sm:items-center">
@@ -89,7 +89,7 @@ $vsp_services_url = vsp_page_url( 'services' );
 
 <div aria-hidden="true" class="vsp-cursor pointer-events-none fixed left-0 top-0 z-[100]">
 	<div class="vsp-cursor-dot flex items-center justify-center rounded-full">
-		<span class="vsp-cursor-label text-[0.7rem] font-medium uppercase tracking-[0.2em] text-ink"></span>
+		<span class="vsp-cursor-label text-[0.7rem] font-bold uppercase tracking-[0.2em] text-ink"></span>
 	</div>
 </div>
 

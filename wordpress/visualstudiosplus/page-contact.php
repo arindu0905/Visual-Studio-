@@ -34,7 +34,7 @@ get_header();
 					<div<?php echo vsp_reveal( 0.35 ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 						<dt class="eyebrow mb-3"><?php esc_html_e( '// Direct email', 'vsp' ); ?></dt>
 						<dd>
-							<a href="mailto:<?php echo esc_attr( $vsp_site['contact']['email'] ); ?>" class="group inline-flex items-center gap-2 font-[family-name:var(--font-display)] text-2xl font-medium tracking-[-0.03em] md:text-3xl">
+							<a href="mailto:<?php echo esc_attr( $vsp_site['contact']['email'] ); ?>" class="group inline-flex items-center gap-2 font-[family-name:var(--font-display)] text-2xl font-bold tracking-[-0.03em] md:text-3xl">
 								<span class="link-underline break-all"><?php echo esc_html( $vsp_site['contact']['email'] ); ?></span>
 								<?php echo vsp_icon( 'arrow-up-right', 'size-5 shrink-0 text-bronze transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 							</a>
@@ -119,7 +119,7 @@ get_header();
 					</div>
 
 					<div class="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
-						<button type="submit" class="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-bone px-9 py-5 text-base font-medium text-ink disabled:opacity-60">
+						<button type="submit" class="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-bone px-9 py-5 text-sm font-bold uppercase tracking-[0.05em] text-ink disabled:opacity-60">
 							<span aria-hidden="true" class="absolute inset-0 translate-y-[101%] rounded-full bg-bronze transition-transform duration-700 ease-[var(--ease-expo)] group-hover:translate-y-0"></span>
 							<span class="relative"><?php esc_html_e( 'Start project brief', 'vsp' ); ?></span>
 							<?php echo vsp_icon( 'arrow-up-right', 'relative size-4 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>

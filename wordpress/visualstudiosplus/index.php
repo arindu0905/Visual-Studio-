@@ -60,7 +60,7 @@ else :
 						<a href="<?php the_permalink(); ?>" class="group grid gap-2 py-8 md:grid-cols-[10rem_1fr] md:gap-8 md:py-10">
 							<span class="text-sm text-stone"><?php echo esc_html( get_the_date() ); ?></span>
 							<span>
-								<span class="block font-[family-name:var(--font-display)] text-3xl font-medium tracking-[-0.03em] transition-colors duration-500 group-hover:text-bronze md:text-4xl"><?php the_title(); ?></span>
+								<span class="block font-[family-name:var(--font-display)] text-3xl font-bold tracking-[-0.03em] transition-colors duration-500 group-hover:text-bronze md:text-4xl"><?php the_title(); ?></span>
 								<span class="mt-3 block max-w-2xl text-bone/60"><?php echo esc_html( wp_trim_words( get_the_excerpt(), 30 ) ); ?></span>
 							</span>
 						</a>

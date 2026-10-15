@@ -67,7 +67,7 @@ echo vsp_parallax_image( vsp_asset( 'DJI_0078-HDR.webp' ), __( 'Aerial photograp
 		<div class="mt-20 grid grid-cols-2 border-t border-line md:mt-28 md:grid-cols-4">
 			<?php foreach ( vsp_default_stats() as $vsp_i => $vsp_stat ) : ?>
 				<div class="border-b border-line py-8 pr-6 md:border-b-0 md:py-12"<?php echo vsp_reveal( $vsp_i * 0.06 ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
-					<p class="font-[family-name:var(--font-display)] text-5xl font-semibold tracking-[-0.04em] text-bronze md:text-7xl"><?php echo esc_html( $vsp_stat[0] ); ?></p>
+					<p class="font-[family-name:var(--font-display)] text-5xl font-black tracking-[-0.04em] text-bronze md:text-7xl"><?php echo esc_html( $vsp_stat[0] ); ?></p>
 					<p class="mt-3 text-sm text-bone/60"><?php echo esc_html( $vsp_stat[1] ); ?></p>
 				</div>
 			<?php endforeach; ?>
@@ -94,7 +94,7 @@ echo vsp_parallax_image( vsp_asset( 'DJI_0078-HDR.webp' ), __( 'Aerial photograp
 			<div<?php echo vsp_reveal(); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 				<a href="<?php echo esc_url( vsp_page_url( 'work' ) ); ?>" data-cursor="view" data-distort-root class="group block">
 					<?php echo vsp_parallax_image( vsp_youtube_thumb( 'd-_dQ9-LmxE' ), __( 'Chef Peter Kuruvita on set for ITC Rathnadeepa', 'vsp' ), array( 'strength' => 6, 'distort' => true, 'class' => 'aspect-[3/2] w-full', 'img_class' => $vsp_disc ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-					<p class="mt-5 font-[family-name:var(--font-display)] text-2xl font-medium tracking-[-0.03em]"><?php esc_html_e( 'Videography & TVC', 'vsp' ); ?></p>
+					<p class="mt-5 font-[family-name:var(--font-display)] text-2xl font-bold tracking-[-0.03em]"><?php esc_html_e( 'Videography & TVC', 'vsp' ); ?></p>
 					<p class="mt-1 text-sm text-bone/55"><?php esc_html_e( '100% In-House Production', 'vsp' ); ?></p>
 				</a>
 			</div>
@@ -102,7 +102,7 @@ echo vsp_parallax_image( vsp_asset( 'DJI_0078-HDR.webp' ), __( 'Aerial photograp
 				<div<?php echo vsp_reveal( ( ( $vsp_i + 1 ) % 3 ) * 0.08 ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 					<a href="<?php echo esc_url( vsp_page_url( 'photography' ) ); ?>" data-cursor="view" data-distort-root class="group block">
 						<?php echo vsp_parallax_image( vsp_asset( $vsp_d[1] ), $vsp_d[2], array( 'strength' => 6, 'distort' => true, 'class' => 'aspect-[3/2] w-full', 'img_class' => $vsp_disc ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-						<p class="mt-5 font-[family-name:var(--font-display)] text-2xl font-medium tracking-[-0.03em]"><?php echo esc_html( $vsp_d[0] ); ?></p>
+						<p class="mt-5 font-[family-name:var(--font-display)] text-2xl font-bold tracking-[-0.03em]"><?php echo esc_html( $vsp_d[0] ); ?></p>
 						<p class="mt-1 text-sm text-bone/55"><?php esc_html_e( 'Commercial Photo', 'vsp' ); ?></p>
 					</a>
 				</div>

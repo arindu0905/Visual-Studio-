@@ -18,7 +18,7 @@ $vsp_img   = 'transition-transform duration-[1400ms] ease-[var(--ease-expo)] ' .
 		</div>
 		<div class="mt-5 flex items-start justify-between gap-6 border-t border-line pt-5"<?php echo vsp_reveal( 0, 20 ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 			<div>
-				<h3 class="font-[family-name:var(--font-display)] text-2xl font-medium leading-tight tracking-[-0.03em] transition-colors duration-500 group-hover:text-bronze md:text-3xl"><?php echo esc_html( $vsp_p['title'] ); ?></h3>
+				<h3 class="font-[family-name:var(--font-display)] text-2xl font-bold leading-tight tracking-[-0.03em] transition-colors duration-500 group-hover:text-bronze md:text-3xl"><?php echo esc_html( $vsp_p['title'] ); ?></h3>
 				<p class="mt-1.5 text-sm text-bone/55"><?php echo esc_html( $vsp_p['category'] ); ?></p>
 			</div>
 			<span class="pt-2 text-xs tabular-nums text-stone"><?php echo esc_html( vsp_pad( $vsp_index + 1 ) ); ?></span>

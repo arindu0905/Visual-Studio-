@@ -99,7 +99,7 @@ function vsp_section_label( $index, $text, $class = '' ) {
 function vsp_button( $href, $label, $args = array() ) {
 	$a       = wp_parse_args( $args, array( 'variant' => 'solid', 'class' => '', 'external' => false, 'magnetic' => true ) );
 	$outline = 'outline' === $a['variant'];
-	$classes = 'group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-7 py-4 text-sm font-medium tracking-wide transition-colors duration-500 '
+	$classes = 'group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-7 py-4 text-xs font-bold uppercase tracking-[0.05em] transition-colors duration-500 '
 		. ( $outline ? 'border border-bone/30 text-bone hover:border-bronze' : 'bg-bone text-ink' ) . ' ' . $a['class'];
 	$hover   = $outline ? ' group-hover:text-ink' : '';
 	$inner   = '<span aria-hidden="true" class="absolute inset-0 translate-y-[101%] rounded-full transition-transform duration-700 ease-[var(--ease-expo)] group-hover:translate-y-0 group-focus-visible:translate-y-0 ' . ( $outline ? 'bg-bone' : 'bg-bronze' ) . '"></span>'

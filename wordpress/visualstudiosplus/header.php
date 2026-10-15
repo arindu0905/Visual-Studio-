@@ -38,7 +38,7 @@ $vsp_desktop_nav = count( $vsp_nav ) > 1 ? array_slice( $vsp_nav, 0, -1 ) : $vsp
 			<ul class="flex items-center gap-9">
 				<?php foreach ( $vsp_desktop_nav as $vsp_item ) : $vsp_on = vsp_is_current( $vsp_item['href'] ); ?>
 					<li>
-						<a href="<?php echo esc_url( $vsp_item['href'] ); ?>" <?php echo $vsp_on ? 'aria-current="page"' : ''; ?> class="group relative text-[0.82rem] tracking-wide transition-colors duration-300 <?php echo $vsp_on ? 'text-bone' : 'text-bone/65 hover:text-bone'; ?>">
+						<a href="<?php echo esc_url( $vsp_item['href'] ); ?>" <?php echo $vsp_on ? 'aria-current="page"' : ''; ?> class="group relative text-xs font-semibold uppercase tracking-[0.05em] transition-colors duration-300 <?php echo $vsp_on ? 'text-bone' : 'text-bone/65 hover:text-bone'; ?>">
 							<span class="relative inline-block overflow-hidden align-top">
 								<span class="inline-block transition-transform duration-500 ease-[var(--ease-expo)] group-hover:-translate-y-full"><?php echo esc_html( $vsp_item['label'] ); ?></span>
 								<span aria-hidden="true" class="absolute left-0 top-full inline-block text-bronze transition-transform duration-500 ease-[var(--ease-expo)] group-hover:-translate-y-full"><?php echo esc_html( $vsp_item['label'] ); ?></span>
@@ -52,7 +52,7 @@ $vsp_desktop_nav = count( $vsp_nav ) > 1 ? array_slice( $vsp_nav, 0, -1 ) : $vsp
 
 		<div class="relative z-10 flex items-center gap-3">
 			<span class="hidden lg:inline-block" data-magnetic>
-				<a href="<?php echo esc_url( $vsp_contact_url ); ?>" class="group inline-flex items-center gap-2 rounded-full border border-bone/25 px-5 py-2.5 text-[0.8rem] tracking-wide transition-colors duration-500 hover:border-bronze hover:bg-bronze hover:text-ink">
+				<a href="<?php echo esc_url( $vsp_contact_url ); ?>" class="group inline-flex items-center gap-2 rounded-full border border-bone/25 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.05em] transition-colors duration-500 hover:border-bronze hover:bg-bronze hover:text-ink">
 					<span class="size-1.5 rounded-full bg-bronze transition-colors group-hover:bg-ink" aria-hidden="true"></span>
 					<?php esc_html_e( 'Inquire project', 'vsp' ); ?>
 				</a>
@@ -82,7 +82,7 @@ $vsp_desktop_nav = count( $vsp_nav ) > 1 ? array_slice( $vsp_nav, 0, -1 ) : $vsp
 				?>
 				<li class="overflow-hidden">
 					<div class="mm-item" style="--i:<?php echo (int) $vsp_i; ?>">
-						<a href="<?php echo esc_url( $vsp_item['href'] ); ?>" <?php echo $vsp_on ? 'aria-current="page"' : ''; ?> class="group flex items-baseline gap-4 py-1 font-[family-name:var(--font-display)] text-[clamp(2.6rem,11vw,5rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
+						<a href="<?php echo esc_url( $vsp_item['href'] ); ?>" <?php echo $vsp_on ? 'aria-current="page"' : ''; ?> class="group flex items-baseline gap-4 py-1 font-[family-name:var(--font-display)] text-[clamp(2.6rem,11vw,5rem)] font-black leading-[1.02] tracking-[-0.04em]">
 							<span class="w-8 text-xs font-normal tracking-normal text-bronze"><?php echo esc_html( vsp_pad( $vsp_i + 1 ) ); ?></span>
 							<span class="transition-colors <?php echo $vsp_on ? 'text-bronze' : 'text-bone group-active:text-bronze'; ?>"><?php echo esc_html( $vsp_item['label'] ); ?></span>
 						</a>

@@ -80,7 +80,7 @@ get_header();
 	<?php if ( $vsp_project['summary'] ) : ?>
 		<section class="container-x grid gap-10 py-24 md:grid-cols-12 md:py-36">
 			<p class="eyebrow md:col-span-3"><?php esc_html_e( 'The project', 'vsp' ); ?></p>
-			<?php echo vsp_split( $vsp_project['summary'], array( 'class' => 'font-[family-name:var(--font-display)] text-[clamp(1.8rem,3.8vw,3.6rem)] font-medium leading-[1.08] tracking-[-0.03em] md:col-span-9', 'stagger' => 0.025 ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+			<?php echo vsp_split( $vsp_project['summary'], array( 'class' => 'font-[family-name:var(--font-display)] text-[clamp(1.8rem,3.8vw,3.6rem)] font-bold leading-[1.08] tracking-[-0.03em] md:col-span-9', 'stagger' => 0.025 ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 		</section>
 	<?php else : ?>
 		<div class="py-12 md:py-20"></div>

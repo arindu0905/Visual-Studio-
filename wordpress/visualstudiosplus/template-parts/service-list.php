@@ -17,7 +17,7 @@ $vsp_url      = vsp_page_url( 'services' );
 					<span aria-hidden="true" class="absolute inset-0 origin-bottom scale-y-0 bg-bone/[0.035] transition-transform duration-700 ease-[var(--ease-expo)] group-hover:scale-y-100"></span>
 					<span class="relative text-xs tabular-nums text-stone transition-all duration-700 ease-[var(--ease-expo)] group-hover:translate-x-2 group-hover:text-bronze md:text-sm"><?php echo esc_html( vsp_pad( $vsp_i + 1 ) ); ?></span>
 					<span class="relative">
-						<span class="block font-[family-name:var(--font-display)] text-[clamp(1.9rem,5.2vw,5.2rem)] font-medium leading-none tracking-[-0.04em] transition-transform duration-700 ease-[var(--ease-expo)] group-hover:translate-x-4 md:group-hover:translate-x-8"><?php echo esc_html( $vsp_s['title'] ); ?></span>
+						<span class="block font-[family-name:var(--font-display)] text-[clamp(1.9rem,5.2vw,5.2rem)] font-bold leading-none tracking-[-0.04em] transition-transform duration-700 ease-[var(--ease-expo)] group-hover:translate-x-4 md:group-hover:translate-x-8"><?php echo esc_html( $vsp_s['title'] ); ?></span>
 						<span class="mt-3 block max-w-md text-sm leading-relaxed text-bone/55 md:hidden"><?php echo esc_html( $vsp_s['summary'] ); ?></span>
 					</span>
 					<span class="relative hidden text-sm leading-relaxed text-bone/55 transition-colors duration-500 group-hover:text-bone/85 md:block"><?php echo esc_html( implode( ' · ', $vsp_s['scope'] ) ); ?></span>

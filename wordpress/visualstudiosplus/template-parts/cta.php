@@ -32,14 +32,14 @@ $vsp_a     = wp_parse_args(
 
 		<div class="mt-16 flex flex-col gap-10 md:mt-24 md:flex-row md:items-end md:justify-between">
 			<div<?php echo vsp_reveal(); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
-				<a href="mailto:<?php echo esc_attr( $vsp_site['contact']['email'] ); ?>" class="group inline-flex items-center gap-3 font-[family-name:var(--font-display)] text-[clamp(1.4rem,3.4vw,3rem)] font-medium tracking-[-0.03em]">
+				<a href="mailto:<?php echo esc_attr( $vsp_site['contact']['email'] ); ?>" class="group inline-flex items-center gap-3 font-[family-name:var(--font-display)] text-[clamp(1.4rem,3.4vw,3rem)] font-bold tracking-[-0.03em]">
 					<span class="link-underline pb-1"><?php echo esc_html( $vsp_site['contact']['email'] ); ?></span>
 					<?php echo vsp_icon( 'arrow-up-right', 'size-[0.9em] text-bronze transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 				</a>
 				<p class="mt-4 text-bone/55"><?php echo esc_html( implode( '  ·  ', $vsp_site['contact']['phones'] ) ); ?></p>
 			</div>
 			<div<?php echo vsp_reveal( 0.1 ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
-				<?php echo vsp_button( vsp_page_url( 'contact' ), $vsp_a['button'], array( 'class' => 'px-9 py-5 text-base' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+				<?php echo vsp_button( vsp_page_url( 'contact' ), $vsp_a['button'], array( 'class' => 'px-9 py-5 text-sm' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 			</div>
 		</div>
 	</div>

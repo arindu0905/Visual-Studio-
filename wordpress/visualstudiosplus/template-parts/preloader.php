@@ -18,7 +18,7 @@
 		</div>
 		<div class="container-x flex items-end justify-between pb-8 md:pb-10">
 			<p class="eyebrow text-bone/50"><?php echo esc_html( vsp_site()['name'] ); ?> — Colombo</p>
-			<p class="pl-count font-[family-name:var(--font-display)] text-5xl font-semibold tabular-nums tracking-[-0.04em] text-bone md:text-7xl">000</p>
+			<p class="pl-count font-[family-name:var(--font-display)] text-5xl font-black tabular-nums tracking-[-0.04em] text-bone md:text-7xl">000</p>
 		</div>
 		<div class="pl-bar absolute bottom-0 left-0 h-px w-0 bg-bronze"></div>
 	</div>

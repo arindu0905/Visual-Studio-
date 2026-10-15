@@ -13,7 +13,7 @@ $vsp_accent = array( 'content', 'creation', 'curation' );
 		<?php echo vsp_section_label( '01', __( 'Agency profile & heritage', 'vsp' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 		<h2 id="about-title" class="sr-only"><?php echo esc_html( sprintf( __( 'About %s', 'vsp' ), $vsp_site['name'] ) ); ?></h2>
 
-		<p data-highlight class="mt-10 max-w-[18ch] font-[family-name:var(--font-display)] text-[clamp(2.4rem,6.4vw,7rem)] font-medium leading-[0.98] tracking-[-0.04em]">
+		<p data-highlight class="mt-10 max-w-[18ch] font-[family-name:var(--font-display)] text-[clamp(2.4rem,6.4vw,7rem)] font-bold leading-[0.98] tracking-[-0.04em]">
 			<?php
 			$vsp_words = preg_split( '/\s+/u', trim( $vsp_site['about']['statement'] ) );
 			foreach ( $vsp_words as $vsp_i => $vsp_w ) {

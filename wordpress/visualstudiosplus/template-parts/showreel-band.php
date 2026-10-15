@@ -29,7 +29,7 @@ $vsp_site = vsp_site();
 			</span>
 			<span class="container-x absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-4 pb-6 text-left md:pb-10">
 				<?php foreach ( $vsp_site['videography']['manifesto'] as $vsp_m ) : ?>
-					<span class="font-[family-name:var(--font-display)] text-lg font-medium tracking-[-0.03em] text-bone md:text-3xl"><?php echo esc_html( $vsp_m ); ?></span>
+					<span class="font-[family-name:var(--font-display)] text-lg font-bold tracking-[-0.03em] text-bone md:text-3xl"><?php echo esc_html( $vsp_m ); ?></span>
 				<?php endforeach; ?>
 			</span>
 		</button>

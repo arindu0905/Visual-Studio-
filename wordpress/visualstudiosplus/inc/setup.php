@@ -35,7 +35,6 @@ add_action(
 	'wp_enqueue_scripts',
 	function () {
 		$uri = get_template_directory_uri();
-		wp_enqueue_style( 'vsp-fonts', 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@400..700&display=swap', array(), null );
 		wp_enqueue_style( 'vsp-theme', $uri . '/assets/css/theme.css', array(), vsp_ver( 'assets/css/theme.css' ) );
 		wp_enqueue_script( 'lenis', $uri . '/assets/vendor/lenis.min.js', array(), vsp_ver( 'assets/vendor/lenis.min.js' ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
 		wp_enqueue_script( 'vsp-theme', $uri . '/assets/js/theme.js', array( 'lenis' ), vsp_ver( 'assets/js/theme.js' ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
@@ -61,8 +60,6 @@ add_action(
 		?>
 <meta name="theme-color" content="#0c0e0c">
 <meta name="color-scheme" content="dark">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>
 document.documentElement.classList.add("js");
 try{

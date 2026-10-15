@@ -88,7 +88,7 @@ get_template_part(
 						<?php echo vsp_parallax_image( $vsp_c['cover'], $vsp_c['cover_alt'], array( 'distort' => true, 'class' => $vsp_even ? 'aspect-[16/11] w-full' : 'aspect-[4/5] w-full', 'img_class' => 'transition-transform duration-[1400ms] ease-[var(--ease-expo)] group-hover:scale-[1.06]' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 						<div class="mt-5 flex items-start justify-between gap-6 border-t border-line pt-5">
 							<div>
-								<h3 class="font-[family-name:var(--font-display)] text-2xl font-medium tracking-[-0.03em] transition-colors duration-500 group-hover:text-bronze md:text-3xl"><?php echo esc_html( $vsp_c['label'] ); ?></h3>
+								<h3 class="font-[family-name:var(--font-display)] text-2xl font-bold tracking-[-0.03em] transition-colors duration-500 group-hover:text-bronze md:text-3xl"><?php echo esc_html( $vsp_c['label'] ); ?></h3>
 								<p class="mt-1.5 text-sm text-bone/55"><?php /* translators: %d: number of photographs */ echo esc_html( sprintf( __( '%d photographs', 'vsp' ), vsp_photo_count( $vsp_c['id'] ) ) ); ?></p>
 							</div>
 							<span class="pt-2 text-xs tabular-nums text-stone"><?php echo esc_html( vsp_pad( $vsp_i + 1 ) ); ?></span>
